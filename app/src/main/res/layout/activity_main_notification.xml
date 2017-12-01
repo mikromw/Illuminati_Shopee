@@ -19,7 +19,6 @@
             android:layout_height="35sp"
             android:layout_marginLeft="5pt"
             android:textColor="#000000"
-            android:textAlignment="textStart"
             android:layout_gravity="center"
             />
         <ImageButton
@@ -48,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/mmtop1"
+        android:layout_above="@id/linebottom"
         android:layout_alignParentStart="true"></ScrollView>
     <View
         android:layout_width="match_parent"
@@ -64,30 +64,35 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true">
         <ImageButton
+            android:id="@+id/notifmainmenu"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/mainmenu0"
             />
         <ImageButton
+            android:id="@+id/notiftimeline"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/timeline0"
             />
         <ImageButton
+            android:id="@+id/notifcamera"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/maincamera"
             />
         <ImageButton
+            android:id="@+id/notifnotif"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@drawable/notif1"
             />
         <ImageButton
+            android:id="@+id/notifprofile"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
