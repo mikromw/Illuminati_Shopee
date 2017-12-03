@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#fff</color>
+    <color name="colorPrimaryDark">#000</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="ColorPrimary">#ff3700</color>
+    <color name="ColorPrimaryDark">#c31c13</color>
+    <color name="tabsScrollColor">#ff3700</color>
+    <color name="garisPemisah">#383838</color>
+    <color name="WarnaTeks">#000</color>
+    <color name="Gray">#efeded</color>
+    <color name="WhiteColor">#fff</color>
 </resources>
