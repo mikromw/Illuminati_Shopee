@@ -55,7 +55,8 @@ public class MainActivity extends Activity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int position) {
-                        // TODO Auto-generated method stub
+                        Intent a = new Intent(MainActivity.this, camera_test.class);
+                        startActivity(a);
                         Toast.makeText(getApplicationContext(),"selected Item:"+position, Toast.LENGTH_SHORT).show();
                     }
 

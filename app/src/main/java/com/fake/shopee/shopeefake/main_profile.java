@@ -85,7 +85,8 @@ public class main_profile extends FragmentActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int position) {
-                        // TODO Auto-generated method stub
+                        Intent a = new Intent(main_profile.this, camera_test.class);
+                        startActivity(a);
                         Toast.makeText(getApplicationContext(),"selected Item:"+position, Toast.LENGTH_SHORT).show();
                     }
 

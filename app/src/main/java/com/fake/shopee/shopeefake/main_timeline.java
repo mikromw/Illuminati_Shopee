@@ -47,7 +47,6 @@ public class main_timeline extends Activity {
             maincamera.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     final CharSequence[] item = {"Kamera","Foto"};
                     AlertDialog.Builder dialog = new AlertDialog.Builder(main_timeline.this);
                     dialog.setTitle("Select");
@@ -55,7 +54,8 @@ public class main_timeline extends Activity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int position) {
-                            // TODO Auto-generated method stub
+                            Intent a = new Intent(main_timeline.this, camera_test.class);
+                            startActivity(a);
                             Toast.makeText(getApplicationContext(),"selected Item:"+position, Toast.LENGTH_SHORT).show();
                         }
 
