@@ -14,7 +14,7 @@ import com.fake.shopee.shopeefake.R;
  */
 
 
-public class fragment_profile extends Fragment{
+public class fragment_profile_sell extends Fragment{
     public static int page=1;
     public void oncreate(Bundle state){
         super.onCreate(state);
@@ -24,8 +24,8 @@ public class fragment_profile extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                        R.layout.row_profile1, container, false);
+        ViewGroup rootView =(ViewGroup) inflater.inflate(
+                        R.layout.fragment_beli_jual, container, false);
         return rootView;
     }
 }

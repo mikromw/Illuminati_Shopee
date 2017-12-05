@@ -2,6 +2,7 @@ package com.fake.shopee.shopeefake;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
+import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,15 +125,19 @@ public class main_profile extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager(),bundle);
         fragment_profile.page=1;
         mPagerAdapter.addfragment(new fragment_profile(),"Beli");
+        mPagerAdapter.addfragment(new fragment_profile(),"jual");
         mPager.setOffscreenPageLimit(1);
         mPager.setAdapter(mPagerAdapter);
+        TabLayout tabLayout = null;
+        tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mPager);
 
     }
 
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
         private final Bundle fragmentbundle;
         private final List<String> mfragmenttitlelsit = new ArrayList<String>();
-        private final List<Fragment> mfragment= new ArrayList<Fragment>();
+        private final List<Fragment> mfragment = new ArrayList<Fragment>();
 
         public ScreenSlidePagerAdapter(FragmentManager fm,Bundle data) {
             super(fm);
@@ -142,14 +148,33 @@ public class main_profile extends FragmentActivity {
             mfragmenttitlelsit.add(title);
         }
         @Override
-        public CharSequence getPageTitle(int Position){return  mfragmenttitlelsit.get(Position);}
+        public CharSequence getPageTitle(int position){
+            String title = null;
+            if (position == 0)
+            {
+                title = "Beli";
+            }
+            else if (position == 1)
+            {
+                title = "Jual";
+            }
+
+            return title;
+        }
 
 
         @Override
         public Fragment getItem(int position) {
-            final fragment_profile f = new fragment_profile();
-            f.setArguments(this.fragmentbundle);
-            return f;
+            Fragment fragment = null;
+            if (position == 0)
+            {
+                fragment =  new fragment_profile();
+            }
+            else if (position == 1)
+            {
+                fragment = new fragment_profile_sell();
+            }
+            return fragment;
         }
 
         @Override
@@ -164,7 +189,7 @@ public class main_profile extends FragmentActivity {
 
         @Override
         public int getCount() {
-            return mfragment.size();
+            return NUM_PAGES;
         }
 
     }
