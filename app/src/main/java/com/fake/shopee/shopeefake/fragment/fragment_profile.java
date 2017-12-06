@@ -26,6 +26,7 @@ public class fragment_profile extends Fragment{
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                         R.layout.row_profile1, container, false);
+
         return rootView;
     }
 }

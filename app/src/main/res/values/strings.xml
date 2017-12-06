@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ShopeeFake</string>
+    <string name="title_activity_main_cart">main_cart</string>
 </resources>

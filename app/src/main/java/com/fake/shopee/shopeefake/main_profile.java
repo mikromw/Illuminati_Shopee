@@ -40,6 +40,7 @@ public class main_profile extends FragmentActivity {
     private ScreenSlidePagerAdapter mPagerAdapter;
     int a=0;
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
+    TabLayout tabLayout;
 
     Bundle bundle=new Bundle();
     @Override
@@ -127,10 +128,10 @@ public class main_profile extends FragmentActivity {
         fragment_profile.page=1;
         mPagerAdapter.addfragment(new fragment_profile(),"Beli");
         mPagerAdapter.addfragment(new fragment_profile(),"jual");
-        mPager.setOffscreenPageLimit(1);
+        mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
-        TabLayout tabLayout = null;
-        tabLayout = findViewById(R.id.tabs);
+
+        tabLayout = findViewById(R.id.tabsprofile);
         tabLayout.setupWithViewPager(mPager);
 
     }
