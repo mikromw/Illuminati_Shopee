@@ -1,24 +1,29 @@
 package com.fake.shopee.shopeefake;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaCas;
+import android.preference.PreferenceManager;
 
 /**
  * Created by Riandy on 12/11/2017.
  */
 
 public class session_class {
-    public static String username="";
-    public static SharedPreferences shp;
+    private SharedPreferences prefs;
 
-    String svr = shp.getString("svr","");
-    String db = shp.getString("db","");
-    String id = shp.getString("id","sa" );
-    String pass = shp.getString("pass","12345");
-    String port = shp.getString("port","");
-    String instance = shp.getString("instance","");
+    public session_class(Context cntx) {
+        // TODO Auto-generated constructor stub
+        prefs = PreferenceManager.getDefaultSharedPreferences(cntx);
+    }
 
-     edit.putString("svr", server);
-                    edit.commit();
-                    edit.putString("db", db);
-                    edit.commit();
+    public void setusename(String usename) {
+        prefs.edit().putString("usename", usename).commit();
+    }
+
+    public String getusename() {
+        String usename = prefs.getString("usename","");
+        return usename;
+    }
 }

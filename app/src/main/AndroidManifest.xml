@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
         <activity
-            android:name=".MainActivity"
+            android:name=".Main_pages.MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/noanimation">
             <intent-filter>
@@ -26,15 +26,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".main_timeline"
+            android:name=".Main_pages.main_timeline"
             android:configChanges="orientation|screenSize"
             android:theme="@style/noanimation" />
         <activity
-            android:name=".main_notification"
+            android:name=".Main_pages.main_notification"
             android:configChanges="orientation|screenSize"
             android:theme="@style/noanimation" />
         <activity
-            android:name=".main_profile"
+            android:name=".Main_pages.main_profile"
             android:configChanges="orientation|screenSize"
             android:theme="@style/noanimation" />
         <activity

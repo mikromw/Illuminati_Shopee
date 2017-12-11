@@ -1,20 +1,18 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.Main_pages;
 
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.camera_test;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.ArrayList;
 
 public class main_timeline extends Activity {
 

@@ -1,27 +1,32 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.Main_pages;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.camera_test;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
+import com.fake.shopee.shopeefake.loginactivity;
+import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,20 +34,14 @@ import java.util.List;
 public class main_profile extends FragmentActivity {
 
     private static final int NUM_PAGES = 2;
-
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
+    session_class session;
     private ViewPager mPager;
-
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
     private ScreenSlidePagerAdapter mPagerAdapter;
     int a=0;
+    Button btnlogin,btnsignup,btnlogout;
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
     TabLayout tabLayout;
+    TextView username;
     String sessioncheck="";
     private FirebaseAuth mAuth;
 
@@ -62,6 +61,8 @@ public class main_profile extends FragmentActivity {
         }
         else{
             sessioncheck="1";
+            session = new session_class(main_profile.this);
+            session.setusename(currentUser.getDisplayName());
         }
     }
 
@@ -79,8 +80,46 @@ public class main_profile extends FragmentActivity {
         mainnotif = (ImageButton) findViewById(R.id.profilenotif);
         mainprofile = (ImageButton) findViewById(R.id.profileprofile);
 
-        if(sessioncheck=="0"){
+        btnlogin = (Button) findViewById(R.id.btnlogin);
+        btnlogout = (Button) findViewById(R.id.btnlogout);
+        btnsignup = (Button) findViewById(R.id.btnSignUp);
 
+        username = (TextView) findViewById(R.id.username);
+
+        if(sessioncheck=="0"){
+            btnlogout.setVisibility(View.GONE);
+            btnlogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(main_profile.this,loginactivity.class);
+                    startActivity(i);
+                    i = new Intent(main_profile.this,main_profile.class);
+                    startActivity(i);
+                }
+            });
+            btnlogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(main_profile.this,loginactivity.class);
+                    startActivity(i);
+                    i = new Intent(main_profile.this,main_profile.class);
+                    startActivity(i);
+                }
+            });
+        }
+        else
+        {
+            btnlogin.setVisibility(View.GONE);
+            btnsignup.setVisibility(View.GONE);
+            username.setText(session.getusename());
+
+            btnlogout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    session.setusename("");
+                    username.setText("Guest");
+                }
+            });
         }
 
 
