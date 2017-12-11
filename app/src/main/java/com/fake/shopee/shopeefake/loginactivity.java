@@ -13,6 +13,8 @@ import com.fake.shopee.shopeefake.fragment.fragement_signup;
 import com.fake.shopee.shopeefake.fragment.fragment_login;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
@@ -20,15 +22,29 @@ import java.util.List;
 
 public class loginactivity extends FragmentActivity {
 
-
+    private FirebaseAuth mAuth;
     ViewPager mPager;
     Bundle bundle;
     TabLayout tabLayout;
     private ScreenSlidePagerAdapter mPagerAdapter;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginactivity);
+
+        mAuth = FirebaseAuth.getInstance();
 
         bundle=new Bundle();
         mPager = (ViewPager) findViewById(R.id.pagerlogin);

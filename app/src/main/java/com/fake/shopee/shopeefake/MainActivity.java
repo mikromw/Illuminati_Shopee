@@ -10,17 +10,22 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
 
+    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mAuth = FirebaseAuth.getInstance();
         mainhome = (ImageButton) findViewById(R.id.mainhome);
         maintimeline = (ImageButton) findViewById(R.id.maintimeline);
         maincamera = (ImageButton) findViewById(R.id.maincamera);
@@ -89,5 +94,16 @@ public class MainActivity extends Activity {
                 finish();
             }
         });
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+
     }
 }

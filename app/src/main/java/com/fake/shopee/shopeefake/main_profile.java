@@ -20,6 +20,8 @@ import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +43,28 @@ public class main_profile extends FragmentActivity {
     int a=0;
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
     TabLayout tabLayout;
+    String sessioncheck="";
+    private FirebaseAuth mAuth;
 
     Bundle bundle=new Bundle();
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+    private void updateUI(FirebaseUser currentUser) {
+        if (currentUser==null){
+            sessioncheck="0";
+        }
+        else{
+            sessioncheck="1";
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +78,10 @@ public class main_profile extends FragmentActivity {
         maincamera = (ImageButton) findViewById(R.id.profilecamera);
         mainnotif = (ImageButton) findViewById(R.id.profilenotif);
         mainprofile = (ImageButton) findViewById(R.id.profileprofile);
+
+        if(sessioncheck=="0"){
+
+        }
 
 
 

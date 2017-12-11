@@ -65,7 +65,6 @@
             android:layout_weight="1"
             android:background="@drawable/profile2"
             android:visibility="visible"
-            app:srcCompat="?android:attr/selectableItemBackgroundBorderless"
             app:layout_constraintLeft_toLeftOf="@+id/imageView"
             app:layout_constraintRight_toRightOf="@+id/imageView"
             app:layout_constraintHorizontal_bias="0.078"
