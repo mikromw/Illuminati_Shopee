@@ -44,7 +44,8 @@
         <activity
             android:name=".main_cart"
             android:label="@string/title_activity_main_cart"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".loginactivity"></activity>
     </application>
 
 </manifest>
