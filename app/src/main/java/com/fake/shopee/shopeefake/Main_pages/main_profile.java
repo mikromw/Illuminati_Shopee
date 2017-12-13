@@ -42,7 +42,6 @@ public class main_profile extends FragmentActivity {
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
     TabLayout tabLayout;
     TextView username;
-    String sessioncheck="";
     private FirebaseAuth mAuth;
 
     Bundle bundle=new Bundle();
@@ -56,14 +55,11 @@ public class main_profile extends FragmentActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
-        if (currentUser==null){
-            sessioncheck="0";
-        }
-        else{
-            sessioncheck="1";
-            session = new session_class(main_profile.this);
+        if (currentUser==null){}
+        else {
             session.setusename(currentUser.getDisplayName());
         }
+
     }
 
     @Override
@@ -71,6 +67,7 @@ public class main_profile extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_profile);
 
+        mAuth = FirebaseAuth.getInstance();
 
         initpager();
 
@@ -85,25 +82,30 @@ public class main_profile extends FragmentActivity {
         btnsignup = (Button) findViewById(R.id.btnSignUp);
 
         username = (TextView) findViewById(R.id.username);
+        session = new session_class(this);
 
-        if(sessioncheck=="0"){
+
+        if(session.getusename()==""){
             btnlogout.setVisibility(View.GONE);
+
+            username.setText("Guest");
+
             btnlogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    session_class.currentactivity="profile";
                     Intent i = new Intent(main_profile.this,loginactivity.class);
                     startActivity(i);
-                    i = new Intent(main_profile.this,main_profile.class);
-                    startActivity(i);
+                    finish();
                 }
             });
-            btnlogin.setOnClickListener(new View.OnClickListener() {
+            btnsignup.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    session_class.currentactivity="profile";
                     Intent i = new Intent(main_profile.this,loginactivity.class);
                     startActivity(i);
-                    i = new Intent(main_profile.this,main_profile.class);
-                    startActivity(i);
+                    finish();
                 }
             });
         }
@@ -111,13 +113,18 @@ public class main_profile extends FragmentActivity {
         {
             btnlogin.setVisibility(View.GONE);
             btnsignup.setVisibility(View.GONE);
+
+            //username set
             username.setText(session.getusename());
 
             btnlogout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent i = new Intent(main_profile.this,main_profile.class);
                     session.setusename("");
                     username.setText("Guest");
+                    startActivity(i);
+                    finish();
                 }
             });
         }
@@ -196,7 +203,7 @@ public class main_profile extends FragmentActivity {
         mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
 
-        tabLayout = findViewById(R.id.tabsprofile);
+        tabLayout = (TabLayout) findViewById(R.id.tabsprofile);
         tabLayout.setupWithViewPager(mPager);
 
     }

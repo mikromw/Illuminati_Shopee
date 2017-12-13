@@ -11,12 +11,14 @@ import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
+import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends Activity {
 
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
+    session_class session;
 
     private FirebaseAuth mAuth;
     @Override
@@ -97,6 +99,10 @@ public class MainActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
+        session = new session_class(this);
+        if(session.getusename()==null){
+            session.setusename("");
+        }
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);

@@ -8,19 +8,30 @@
         android:orientation="vertical"
         android:layout_marginTop="10pt"
         android:padding="10px">
-        <EditText
+        <AutoCompleteTextView
+            android:textColorHint="#808080"
             android:id="@+id/emaillogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email or username"/>
+            android:maxLines="1"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:hint="Email"/>
         <EditText
+            android:textColorHint="#808080"
             android:id="@+id/passwordlogin"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
             android:layout_height="wrap_content"
-            android:hint="Password"/>
+            android:hint="Password"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"/>
         <Button
-            android:id="@+id/btnlogin"
+            android:backgroundTint="@color/ColorPrimary"
+            android:textColor="@color/WhiteColor"
+            android:id="@+id/btnloginlogin"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
             android:layout_height="wrap_content"

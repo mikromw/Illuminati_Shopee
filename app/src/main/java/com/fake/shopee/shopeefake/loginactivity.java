@@ -1,5 +1,6 @@
 package com.fake.shopee.shopeefake;
 
+
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -25,6 +26,7 @@ public class loginactivity extends FragmentActivity {
     private FirebaseAuth mAuth;
     ViewPager mPager;
     Bundle bundle;
+    session_class session;
     TabLayout tabLayout;
     private ScreenSlidePagerAdapter mPagerAdapter;
 
@@ -37,6 +39,14 @@ public class loginactivity extends FragmentActivity {
     }
 
     private void updateUI(FirebaseUser currentUser) {
+        session = new session_class(this);
+        if (currentUser==null){
+            session.setusename("");
+        }
+        else
+        {
+            session.setusename(currentUser.getDisplayName());
+        }
     }
 
     @Override
@@ -54,7 +64,7 @@ public class loginactivity extends FragmentActivity {
         mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
 
-        tabLayout = findViewById(R.id.tablogin);
+        tabLayout = (TabLayout) findViewById(R.id.tablogin);
         tabLayout.setupWithViewPager(mPager);
 
 

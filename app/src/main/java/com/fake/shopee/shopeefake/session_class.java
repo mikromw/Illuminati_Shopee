@@ -3,7 +3,6 @@ package com.fake.shopee.shopeefake;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaCas;
 import android.preference.PreferenceManager;
 
 /**
@@ -26,4 +25,5 @@ public class session_class {
         String usename = prefs.getString("usename","");
         return usename;
     }
+    public static String currentactivity="";
 }

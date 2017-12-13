@@ -12,24 +12,35 @@
             android:id="@+id/usernamesignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
             android:hint="username"/>
         <EditText
             android:id="@+id/emailsignup"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
+            android:inputType="textEmailAddress"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
             android:hint="Email"/>
         <EditText
             android:id="@+id/passwordsignup"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
             android:layout_height="wrap_content"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:singleLine="true"
             android:hint="Password"/>
         <Button
+            android:backgroundTint="@color/ColorPrimary"
+            android:textColor="@color/WhiteColor"
             android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
             android:layout_height="wrap_content"
-            android:text="Login"/>
+            android:text="Signup dan Login"/>
     </LinearLayout>
 </RelativeLayout>
