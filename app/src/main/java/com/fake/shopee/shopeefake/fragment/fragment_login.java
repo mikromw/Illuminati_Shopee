@@ -1,5 +1,8 @@
 package com.fake.shopee.shopeefake.fragment;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.fake.shopee.shopeefake.Main_pages.main_profile;
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +34,7 @@ public class fragment_login extends Fragment{
     EditText email,pass;
     Button btnlogin;
     private FirebaseAuth mAuth;
+    ProgressDialog dialog;
 
 
     @Override
@@ -42,55 +47,36 @@ public class fragment_login extends Fragment{
         pass = (EditText) rootView.findViewById(R.id.passwordlogin);
         btnlogin = (Button) rootView.findViewById(R.id.btnloginlogin);
 
-
-
-
-        mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("firebase", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            session_class session= new session_class(getActivity());
-                            session.setusename(user.getDisplayName());
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(getActivity(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            session_class session= new session_class(getActivity());
-                            session.setusename("");
-                        }
-
-                        // ...
-                    }
-                });
-
+        btnlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog = new ProgressDialog(getActivity());
+                dialog.setMessage("Login...");
+                dialog.show();
+                DoLogin doLogin = new DoLogin();
+                doLogin.execute("");
+            }
+        });
 
         return rootView;
     }
     public class DoLogin extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
-        String userid = edtuserid.getText().toString();
-        String password = edtpass.getText().toString();
+        String userid = email.getText().toString();
+        String password = pass.getText().toString();
 
         @Override
         protected void onPreExecute() {
-            pblogin.setVisibility(View.VISIBLE);
+
         }
 
         @Override
         protected void onPostExecute(String r) {
-            pblogin.setVisibility(View.GONE);
-            Toast.makeText(loginprogram.this, r, Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+            Toast.makeText(getActivity(), r, Toast.LENGTH_SHORT).show();
             if (isSuccess) {
-                SharedPreferences.Editor edit = shp.edit();
-                edit.putString("UserId", userid);
-                edit.commit();
-                Intent i = new Intent(loginprogram.this, mainmenu.class);
+                Intent i = new Intent(getActivity(), main_profile.class);
                 startActivity(i);
             }
         }
@@ -99,38 +85,54 @@ public class fragment_login extends Fragment{
 
         @Override
         protected String doInBackground(String... params) {
-            if (userid.trim().equals("") || password.trim().equals(""))
-                z = "Please enter User Id and Password";
-            else {
+            mAuth.signInWithEmailAndPassword(userid, password)
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                session_class session= new session_class(getActivity());
+                                session.setusename(user.getDisplayName());
+                                z="Signed in As"+user.getDisplayName();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(getActivity(), "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                session_class session= new session_class(getActivity());
+                                session.setusename("");
+                                z="Error Login";
+                            }
 
-                try {
-                    Connection con = sqlclass.CONN(sqlclass.ip,sqlclass.db,sqlclass.un,sqlclass.password,sqlclass.port,sqlclass.instance);
-                    if (con == null) {
-                        z = "Error in connection with SQL server";
-                        Intent i = new Intent(loginprogram.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
-                    } else {
-                        ResultSet result = sqlclass.querydata("select * from xUser where User_id='"
-                                + userid + "' and dbo.GETPASS(password)='"+password+"'");
-                        //String querydata = "select * from xUser where User_id='"
-                        //        + userid + "' and password='" + password + "'";
-                        // Statement stmt = con.createStatement();
-                        // ResultSet rs = stmt.executeQuery(query);
-                        if (result.next()) {
-                            generator.userlogin=userid;
-                            z = "Login successfull";
-                            isSuccess = true;
+                            // ...
                         }
-                        if (z!="Login successfull"){
-                            z = "Invalid Credentials";
+                    });
+            mAuth.createUserWithEmailAndPassword(userid, password)
+                    .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("firebase", "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                session_class session= new session_class(getActivity());
+                                session.setusename(user.getDisplayName());
+                                z="Signed in As"+user.getDisplayName();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(getActivity(), "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                session_class session= new session_class(getActivity());
+                                session.setusename("");
+                                z="Login failed";
+                            }
+
+                            // ...
                         }
-                    }
-                } catch (Exception ex) {
-                    isSuccess = false;
-                    z = ex.toString();
-                }
-            }
+                    });
             return z;
         }
     }
