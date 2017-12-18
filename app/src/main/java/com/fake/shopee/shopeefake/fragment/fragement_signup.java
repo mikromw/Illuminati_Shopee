@@ -23,6 +23,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static android.content.ContentValues.TAG;
 
 /**
@@ -44,17 +47,30 @@ public class fragement_signup extends Fragment {
                 R.layout.fragment_signup, container, false);
         email = (EditText) rootView.findViewById(R.id.emailsignup);
         pass = (EditText) rootView.findViewById(R.id.passwordsignup);
-        btnsignup = (Button) rootView.findViewById(R.id.btnSignUp);
+        btnsignup = (Button) rootView.findViewById(R.id.btnsignup);
         userid = (EditText) rootView.findViewById(R.id.usernamesignup);
+
 
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = new ProgressDialog(getActivity());
-                dialog.setMessage("Login...");
-                dialog.show();
-                DoSignup doLogin = new DoSignup();
-                doLogin.execute("");
+                if (isvalidemail(email.getText().toString()) && isvalidpassword(pass.getText().toString())){
+                    DoSignup doLogin = new DoSignup();
+                    doLogin.execute("");
+                }
+                else if(isvalidemail(email.getText().toString())==false) {
+                    Toast.makeText(getActivity(), "Bad Email",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else if(isvalidpassword(pass.getText().toString())==false) {
+                    Toast.makeText(getActivity(), "Bad password",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Bad password",
+                            Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -66,15 +82,19 @@ public class fragement_signup extends Fragment {
         String username = userid.getText().toString();
         String emaildata = email.getText().toString();
         String password = pass.getText().toString();
+        private ProgressDialog dialog=new ProgressDialog(getActivity());
 
         @Override
         protected void onPreExecute() {
-
+            this.dialog.setMessage("Signing up & Logging in");
+            this.dialog.show();
         }
 
         @Override
         protected void onPostExecute(String r) {
-            dialog.dismiss();
+            if (dialog.isShowing()) {
+                dialog.dismiss();
+            }
             Toast.makeText(getActivity(), r, Toast.LENGTH_SHORT).show();
             if (isSuccess) {
                 Intent i = new Intent(getActivity(), main_profile.class);
@@ -86,7 +106,8 @@ public class fragement_signup extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            mAuth.createUserWithEmailAndPassword(username, password)
+            Log.e("data",username+" "+email+" "+password);
+            mAuth.createUserWithEmailAndPassword(emaildata, password)
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -94,23 +115,53 @@ public class fragement_signup extends Fragment {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d("firebase", "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                session_class session= new session_class(getActivity());
+                                session_class session = new session_class(getActivity());
                                 session.setusename(user.getDisplayName());
-                                z="Signed in As"+user.getDisplayName();
+                                z = "Signed in As" + user.getDisplayName();
+                                isSuccess = true;
+                                onPostExecute(z);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(getActivity(), "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                session_class session= new session_class(getActivity());
+                                session_class session = new session_class(getActivity());
                                 session.setusename("");
-                                z="Login failed";
+                                z = "Login failed";
+                                onPostExecute(z);
                             }
-
                             // ...
                         }
                     });
             return z;
         }
     }
+    public boolean isvalidpassword (final String password){
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }
+
+    public boolean isvalidemail (final String email){
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(email);
+
+        return matcher.matches();
+
+    }
+
 }

@@ -21,12 +21,9 @@ import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
-import com.fake.shopee.shopeefake.loginactivity;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +84,7 @@ public class main_profile extends FragmentActivity {
 
         if(session.getusename()==""){
             btnlogout.setVisibility(View.GONE);
-
+            btnsignup.setVisibility(View.GONE);
             username.setText("Guest");
 
             btnlogin.setOnClickListener(new View.OnClickListener() {

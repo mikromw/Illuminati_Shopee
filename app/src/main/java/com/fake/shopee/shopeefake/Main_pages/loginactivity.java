@@ -1,4 +1,4 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.Main_pages;
 
 
 import android.support.design.widget.TabLayout;
@@ -7,17 +7,15 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.fragment.fragement_signup;
 import com.fake.shopee.shopeefake.fragment.fragment_login;
-import com.fake.shopee.shopeefake.fragment.fragment_profile;
-import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
+import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.nio.BufferUnderflowException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +27,7 @@ public class loginactivity extends FragmentActivity {
     session_class session;
     TabLayout tabLayout;
     private ScreenSlidePagerAdapter mPagerAdapter;
+
 
     @Override
     public void onStart() {
@@ -54,11 +53,14 @@ public class loginactivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginactivity);
 
+        if (savedInstanceState != null) {
+        }
+
         mAuth = FirebaseAuth.getInstance();
 
         bundle=new Bundle();
         mPager = (ViewPager) findViewById(R.id.pagerlogin);
-        mPagerAdapter = new loginactivity.ScreenSlidePagerAdapter(getSupportFragmentManager(),bundle);
+        mPagerAdapter = new loginactivity.ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addfragment(new fragment_login(),"Beli");
         mPagerAdapter.addfragment(new fragement_signup(),"jual");
         mPager.setOffscreenPageLimit(2);
@@ -70,13 +72,11 @@ public class loginactivity extends FragmentActivity {
 
     }
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {
-        private final Bundle fragmentbundle;
         private final List<String> mfragmenttitlelsit = new ArrayList<String>();
         private final List<Fragment> mfragment = new ArrayList<Fragment>();
 
-        public ScreenSlidePagerAdapter(FragmentManager fm, Bundle data) {
+        public ScreenSlidePagerAdapter(FragmentManager fm) {
             super(fm);
-            fragmentbundle = data;
         }
         public void addfragment(Fragment fragment, String title){
             mfragment.add(fragment);
@@ -138,5 +138,11 @@ public class loginactivity extends FragmentActivity {
             // Otherwise, select the previous step.
             mPager.setCurrentItem(mPager.getCurrentItem() - 1);
         }
+    }
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        //Save the fragment's state here
     }
 }

@@ -1,35 +1,43 @@
 {
   "project_info": {
-    "project_number": "540793756764",
-    "firebase_url": "https://shopeefake.firebaseio.com",
-    "project_id": "shopeefake",
-    "storage_bucket": "shopeefake.appspot.com"
+    "project_number": "60826284823",
+    "firebase_url": "https://shopeef-5eda6.firebaseio.com",
+    "project_id": "shopeef-5eda6",
+    "storage_bucket": "shopeef-5eda6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:540793756764:android:c976cbd618191687",
+        "mobilesdk_app_id": "1:60826284823:android:c976cbd618191687",
         "android_client_info": {
           "package_name": "com.fake.shopee.shopeefake"
         }
       },
       "oauth_client": [
         {
-          "client_id": "540793756764-4unltbrsos1e9l9p8qjhadfpqe3vat6s.apps.googleusercontent.com",
+          "client_id": "60826284823-qcdf4hpp6k0eofe6og6g4366ftgijpf6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.fake.shopee.shopeefake",
-            "certificate_hash": "6d3bd77a695fff6cd742a755fe6697b9ec943a69"
+            "certificate_hash": "de5f24884f26be1421712473b3934f637c95ea9b"
           }
         },
         {
-          "client_id": "540793756764-9cllknit1hpi4426svosfu8dakjte7v9.apps.googleusercontent.com",
+          "client_id": "60826284823-3ba6vn6jiq39nia3f1kjiu8uo384i8k5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fake.shopee.shopeefake",
+            "certificate_hash": "9df9704b2ec95471e06b4ada0109cbf71cb2dd29"
+          }
+        },
+        {
+          "client_id": "60826284823-s36tr686l6152a7rueinjh8vo04pm9rg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBaKTWzBgKLV4ZiPgHBJd_qEimglEQz7_M"
+          "current_key": "AIzaSyBW3Km3SuGUewrF2dq8M7SeQWNLNUDFdhk"
         }
       ],
       "services": {
@@ -40,7 +48,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "540793756764-9cllknit1hpi4426svosfu8dakjte7v9.apps.googleusercontent.com",
+              "client_id": "60826284823-s36tr686l6152a7rueinjh8vo04pm9rg.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

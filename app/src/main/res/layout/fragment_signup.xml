@@ -9,6 +9,7 @@
         android:layout_marginTop="10pt"
         android:padding="10px">
         <EditText
+            android:textColor="#000000"
             android:id="@+id/usernamesignup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -16,6 +17,7 @@
             android:singleLine="true"
             android:hint="username"/>
         <EditText
+            android:textColor="#000000"
             android:id="@+id/emailsignup"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
@@ -25,6 +27,7 @@
             android:singleLine="true"
             android:hint="Email"/>
         <EditText
+            android:textColor="#000000"
             android:id="@+id/passwordsignup"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
@@ -37,7 +40,7 @@
         <Button
             android:backgroundTint="@color/ColorPrimary"
             android:textColor="@color/WhiteColor"
-            android:id="@+id/btnlogin"
+            android:id="@+id/btnsignup"
             android:layout_width="match_parent"
             android:layout_marginTop="10pt"
             android:layout_height="wrap_content"

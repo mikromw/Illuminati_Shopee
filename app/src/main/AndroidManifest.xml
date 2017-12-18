@@ -51,7 +51,7 @@
             android:label="@string/title_activity_main_cart"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".loginactivity"
+            android:name=".Main_pages.loginactivity"
             android:theme="@style/noanimation" />
         <activity
             android:name=".sample"
