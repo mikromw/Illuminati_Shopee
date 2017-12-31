@@ -54,7 +54,7 @@ public class main_profile extends FragmentActivity {
     private void updateUI(FirebaseUser currentUser) {
         if (currentUser==null){}
         else {
-            session.setusename(currentUser.getDisplayName());
+            session.setusename(currentUser.getEmail());
         }
 
     }
@@ -118,6 +118,7 @@ public class main_profile extends FragmentActivity {
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(main_profile.this,main_profile.class);
+                    FirebaseAuth.getInstance().signOut();
                     session.setusename("");
                     username.setText("Guest");
                     startActivity(i);

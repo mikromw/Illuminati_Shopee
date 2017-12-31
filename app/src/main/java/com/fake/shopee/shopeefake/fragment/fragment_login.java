@@ -113,8 +113,8 @@ public class fragment_login extends Fragment{
                                 Log.d(TAG, "signInWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 session_class session= new session_class(getActivity());
-                                session.setusename(user.getDisplayName());
-                                z="Signed in As"+user.getDisplayName();
+                                session.setusename(user.getEmail());
+                                z="Signed in As "+user.getEmail();
                                 isSuccess=true;
                                 onPostExecute(z);
                             } else {
