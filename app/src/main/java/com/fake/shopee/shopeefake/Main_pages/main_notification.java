@@ -11,12 +11,13 @@ import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
+import com.fake.shopee.shopeefake.main_cart;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class main_notification extends Activity {
 
-    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
+    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart;
     private FirebaseAuth mAuth;
 
     @Override
@@ -100,6 +101,14 @@ public class main_notification extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(main_notification.this , main_profile.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        maincart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(main_notification.this , main_cart.class);
                 startActivity(i);
                 finish();
             }

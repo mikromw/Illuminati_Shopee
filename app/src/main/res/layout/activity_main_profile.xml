@@ -30,6 +30,15 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="?attr/actionBarDivider" />
 
+        <ImageButton
+            android:id="@+id/profilecart"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/cartprofile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <TextView
             android:id="@+id/pengikutikut"
             android:layout_width="112dp"
@@ -132,7 +141,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/tabsprofile" />
+        android:layout_alignParentTop="true" />
 
     <!--<View
         android:layout_width="match_parent"

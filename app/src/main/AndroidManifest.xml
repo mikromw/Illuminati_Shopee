@@ -49,7 +49,7 @@
         <activity
             android:name=".main_cart"
             android:label="@string/title_activity_main_cart"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/noanimation" />
         <activity
             android:name=".Main_pages.loginactivity"
             android:theme="@style/noanimation" />

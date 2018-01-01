@@ -21,6 +21,7 @@ import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
+import com.fake.shopee.shopeefake.main_cart;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,7 +37,7 @@ public class main_profile extends FragmentActivity {
     private ScreenSlidePagerAdapter mPagerAdapter;
     int a=0;
     Button btnlogin,btnsignup,btnlogout;
-    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
+    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart;
     TabLayout tabLayout;
     TextView username;
     private FirebaseAuth mAuth;
@@ -73,6 +74,7 @@ public class main_profile extends FragmentActivity {
         maincamera = (ImageButton) findViewById(R.id.profilecamera);
         mainnotif = (ImageButton) findViewById(R.id.profilenotif);
         mainprofile = (ImageButton) findViewById(R.id.profileprofile);
+        maincart = (ImageButton) findViewById(R.id.profilecart);
 
         btnlogin = (Button) findViewById(R.id.btnlogin);
         btnlogout = (Button) findViewById(R.id.btnlogout);
@@ -186,6 +188,14 @@ public class main_profile extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(main_profile.this , main_profile.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        maincart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(main_profile.this , main_cart.class);
                 startActivity(i);
                 finish();
             }

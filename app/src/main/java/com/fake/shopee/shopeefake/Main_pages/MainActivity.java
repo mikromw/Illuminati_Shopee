@@ -11,13 +11,14 @@ import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
+import com.fake.shopee.shopeefake.main_cart;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends Activity {
 
-    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile;
+    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart;
     session_class session;
 
     private FirebaseAuth mAuth;
@@ -32,6 +33,7 @@ public class MainActivity extends Activity {
         maincamera = (ImageButton) findViewById(R.id.maincamera);
         mainnotif = (ImageButton) findViewById(R.id.mainnotif);
         mainprofile = (ImageButton) findViewById(R.id.mainprofile);
+        maincart = (ImageButton) findViewById(R.id.maincart);
 
         mainhome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +93,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this , main_profile.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        maincart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this , main_cart.class);
                 startActivity(i);
                 finish();
             }
