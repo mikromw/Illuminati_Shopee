@@ -43,6 +43,7 @@ public class main_notification extends Activity {
         maincamera = (ImageButton) findViewById(R.id.notifcamera);
         mainnotif = (ImageButton) findViewById(R.id.notifnotif);
         mainprofile = (ImageButton) findViewById(R.id.notifprofile);
+        maincart = (ImageButton) findViewById(R.id.notifcart);
 
         mainhome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +111,6 @@ public class main_notification extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(main_notification.this , main_cart.class);
                 startActivity(i);
-                finish();
             }
         });
     }

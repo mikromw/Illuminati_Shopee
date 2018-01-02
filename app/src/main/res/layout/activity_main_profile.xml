@@ -138,10 +138,10 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
+        android:layout_below="@id/tabsprofile"
+        android:layout_above="@id/linebottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_height="match_parent"/>
 
     <!--<View
         android:layout_width="match_parent"

@@ -16,9 +16,9 @@ import java.sql.Statement;
 public class SQLclass {
 
     public String status = "";
-    public static String ip = "";
+    public static String ip = "192.168.1.4";
     public static String driver = "net.sourceforge.jtds.jdbc.Driver";
-    public static String db = "";
+    public static String db = "shopee";
     public static String un = "sa";
     public static String password = "12345";
     public static String port = "";

@@ -99,7 +99,6 @@ public class main_timeline extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(main_timeline.this , main_cart.class);
                 startActivity(i);
-                finish();
                 }
         });
     }

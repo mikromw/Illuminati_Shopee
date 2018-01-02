@@ -197,7 +197,6 @@ public class main_profile extends FragmentActivity {
             public void onClick(View v) {
                 Intent i = new Intent(main_profile.this , main_cart.class);
                 startActivity(i);
-                finish();
             }
         });
     }

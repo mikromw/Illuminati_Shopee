@@ -56,7 +56,10 @@
         <activity
             android:name=".sample"
             android:label="@string/title_activity_sample"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".main_belanjaanku" android:theme="@style/AppTheme">
+
+        </activity>
     </application>
 
 </manifest>

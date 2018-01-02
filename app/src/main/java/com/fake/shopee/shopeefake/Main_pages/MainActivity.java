@@ -102,7 +102,6 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this , main_cart.class);
                 startActivity(i);
-                finish();
             }
         });
     }
