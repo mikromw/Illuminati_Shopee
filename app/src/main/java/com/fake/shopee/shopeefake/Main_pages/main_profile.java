@@ -21,7 +21,6 @@ import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.camera_test;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
 import com.fake.shopee.shopeefake.fragment.fragment_profile_sell;
-import com.fake.shopee.shopeefake.main_cart;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

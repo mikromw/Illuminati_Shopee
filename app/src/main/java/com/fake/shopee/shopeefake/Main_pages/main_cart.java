@@ -1,10 +1,10 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.Main_pages;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.fake.shopee.shopeefake.Main_pages.loginactivity;
+import com.fake.shopee.shopeefake.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

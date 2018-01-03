@@ -47,7 +47,7 @@
             android:configChanges="orientation|screenSize"
             android:theme="@style/noanimation" />
         <activity
-            android:name=".main_cart"
+            android:name=".Main_pages.main_cart"
             android:label="@string/title_activity_main_cart"
             android:theme="@style/noanimation" />
         <activity
@@ -57,7 +57,7 @@
             android:name=".sample"
             android:label="@string/title_activity_sample"
             android:theme="@style/AppTheme" />
-        <activity android:name=".main_belanjaanku" android:theme="@style/AppTheme">
+        <activity android:name=".Main_pages.main_belanjaanku" android:theme="@style/noanimation">
 
         </activity>
     </application>
