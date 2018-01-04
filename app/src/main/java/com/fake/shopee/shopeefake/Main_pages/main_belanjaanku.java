@@ -57,7 +57,7 @@ public class main_belanjaanku extends FragmentActivity {
 
         mAuth = FirebaseAuth.getInstance();
         session = new session_class(this);
-
+        initpager();
     }
 
     private void initpager(){
