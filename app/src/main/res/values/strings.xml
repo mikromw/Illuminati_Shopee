@@ -33,4 +33,9 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="produk_yang_pernah_dilihat">Produk yang pernah dilihat</string>
+    <string name="terakhir_dilihat">Terakhir Dilihat</string>
+    <string name="lihat_riwayat_pembelanjaan">Lihat Riwayat Pembelanjaan</string>
+    <string name="belanjaanku">Belanjaanku</string>
+    <string name="apa_aja_sih_kelebihan_berbelanja_berjualan_di_sh"><![CDATA[Apa aja sih kelebihan berbelanja & berjualan di Sh...]]></string>
 </resources>

@@ -61,14 +61,14 @@ public class main_belanjaanku extends FragmentActivity {
     }
 
     private void initpager(){
-        mPager = (ViewPager) findViewById(R.id.pager);
+        mPager = (ViewPager) findViewById(R.id.pagerbelanjaanku);
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addfragment(new fragment_profile());
-        mPagerAdapter.addfragment(new fragment_profile());
         mPager.setOffscreenPageLimit(6);
         mPager.setAdapter(mPagerAdapter);
 
         tabLayout = (TabLayout) findViewById(R.id.tabbelanja);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
         tabLayout.addTab(tabLayout.newTab().setText("Belum bayar"));
         tabLayout.addTab(tabLayout.newTab().setText("Dikemas"));
         tabLayout.addTab(tabLayout.newTab().setText("Dikirim"));
@@ -95,27 +95,27 @@ public class main_belanjaanku extends FragmentActivity {
             String title = null;
             if (position == 0)
             {
-                title = "Beli";
+                title = "Belum Bayar";
             }
             else if (position == 1)
             {
-                title = "Jual";
+                title = "Dikemas";
             }
             else if (position == 2)
             {
-                title = "Jual";
+                title = "Dikirim";
             }
             else if (position == 3)
             {
-                title = "Jual";
+                title = "Selesai";
             }
             else if (position == 4)
             {
-                title = "Jual";
+                title = "Batal";
             }
             else if (position == 5)
             {
-                title = "Jual";
+                title = "Pengembalian";
             }
 
 

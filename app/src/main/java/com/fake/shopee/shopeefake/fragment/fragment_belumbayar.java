@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.fake.shopee.shopeefake.R;
 
@@ -18,6 +19,8 @@ public class fragment_belumbayar extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.row_belanjaanku, container, false);
+        TextView a = (TextView) rootView.findViewById(R.id.text);
+        a.setText("Belum Bayar");
         return rootView;
     }
 }
