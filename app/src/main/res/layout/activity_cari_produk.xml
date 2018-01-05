@@ -181,9 +181,9 @@
         android:layout_height="match_parent"
         android:background="@color/Gray">
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/lst_item_product"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/lst_item"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 
