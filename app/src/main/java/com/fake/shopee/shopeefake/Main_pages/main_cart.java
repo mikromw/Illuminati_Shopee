@@ -1,19 +1,26 @@
 package com.fake.shopee.shopeefake.Main_pages;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.fake.shopee.shopeefake.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class main_cart extends AppCompatActivity {
+public class main_cart extends Activity {
 
     private FirebaseAuth mAuth;
-    ImageButton backarrow;
+    Button plus,minus;
+    TextView angka;
+    ImageButton backarrowiage;
+    int temp=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,14 +28,37 @@ public class main_cart extends AppCompatActivity {
         setContentView(R.layout.activity_check_out);
 
         mAuth = FirebaseAuth.getInstance();
-        backarrow = (ImageButton) findViewById(R.id.backarrow);
-
-        backarrow.setOnClickListener(new View.OnClickListener() {
+        minus = (Button) findViewById(R.id.btn_minusCheckout);
+        plus = (Button) findViewById(R.id.btn_plsCheckout);
+        angka = (TextView) findViewById(R.id.txt_qtyCheckout);
+        minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                String operators = "-";
+                temp = Integer.parseInt(angka.getText().toString());
+                angka.setText(angkachecker(temp,operators));
             }
         });
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String operators = "+";
+                temp = Integer.parseInt(angka.getText().toString());
+                angka.setText(angkachecker(temp,operators));
+            }
+        });
+    }
+    private String angkachecker(int currentqty,String operators){
+        if(operators.equals("+")){
+                return String.valueOf(currentqty + 1);
+        }
+        else {
+            if (currentqty == 0) {
+                return "0";
+            } else {
+                return String.valueOf(currentqty - 1);
+            }
+        }
     }
 
     @Override
