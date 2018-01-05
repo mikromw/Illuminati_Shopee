@@ -13,12 +13,13 @@
         android:id="@+id/mmtop1"
         android:orientation="horizontal">
         <ImageButton
+            android:id="@+id/backarrow"
             android:layout_weight="0.3"
             android:layout_width="0dp"
             android:layout_height="35sp"
             android:layout_marginLeft="3pt"
             android:layout_gravity="center"
-            android:background="@drawable/timelineadd"
+            android:background="@drawable/backarrow"
             />
         <TextView
             android:layout_width="0dp"
@@ -44,56 +45,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ></ScrollView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:id="@+id/linebottom"
-        android:background="#D3D3D3"
-        android:layout_above="@+id/mmbottom1"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="48sp"
-        android:id="@+id/mmbottom1"
-        android:background="#ffffff"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
-        <ImageButton
-            android:layout_weight="1"
-            android:id="@+id/timemainmenu"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/mainmenu0"
-            />
-        <ImageButton
-            android:layout_weight="1"
-            android:id="@+id/timetimeline"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/timeline1"
-            />
-        <ImageButton
-            android:layout_weight="1"
-            android:id="@+id/timecamera"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/maincamera"
-            />
-        <ImageButton
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:id="@+id/timenotif"
-            android:layout_height="match_parent"
-            android:background="@drawable/notif0"
-            />
-        <ImageButton
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:id="@+id/timeprofile"
-            android:layout_height="match_parent"
-            android:background="@drawable/profile"
-            />
-
-    </LinearLayout>
 
 </RelativeLayout>

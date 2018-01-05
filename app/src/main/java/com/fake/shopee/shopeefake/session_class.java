@@ -26,4 +26,5 @@ public class session_class {
         return usename;
     }
     public static String currentactivity="";
+    //command for passing activity fragment pages
 }

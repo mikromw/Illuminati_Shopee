@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.Main_pages.main_belanjaanku;
+import com.fake.shopee.shopeefake.session_class;
 
 /**
  * Created by Riandy on 12/1/2017.
@@ -19,6 +20,7 @@ import com.fake.shopee.shopeefake.Main_pages.main_belanjaanku;
 
 public class fragment_profile extends Fragment{
     public static int page=1;
+    session_class session;
     public void oncreate(Bundle state){
         super.onCreate(state);
 
@@ -43,6 +45,7 @@ public class fragment_profile extends Fragment{
             public void onClick(View view) {
                 Intent a = new Intent(getActivity(),main_belanjaanku.class);
                 startActivity(a);
+
             }
         });
 
@@ -50,20 +53,25 @@ public class fragment_profile extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(getActivity(),main_belanjaanku.class);
+                session.currentactivity="0";
                 startActivity(a);
+
             }
         });
         dikemas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(getActivity(),main_belanjaanku.class);
+                session.currentactivity="1";
                 startActivity(a);
+
             }
         });
         dikirim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(getActivity(),main_belanjaanku.class);
+                session.currentactivity="2";
                 startActivity(a);
             }
         });
@@ -71,6 +79,7 @@ public class fragment_profile extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent a = new Intent(getActivity(),main_belanjaanku.class);
+                session.currentactivity="5";
                 startActivity(a);
             }
         });

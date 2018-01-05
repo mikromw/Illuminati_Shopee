@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.fragment.fragment_batal;
@@ -28,6 +30,7 @@ import java.util.List;
 public class main_belanjaanku extends FragmentActivity {
 
     TabLayout tabLayout;
+    ImageButton backarrow;
     private FirebaseAuth mAuth;
     private static final int NUM_PAGES = 6;
     session_class session;
@@ -57,6 +60,14 @@ public class main_belanjaanku extends FragmentActivity {
 
         mAuth = FirebaseAuth.getInstance();
         session = new session_class(this);
+        backarrow = (ImageButton) findViewById(R.id.backarrow);
+
+        backarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         initpager();
     }
 
@@ -65,6 +76,7 @@ public class main_belanjaanku extends FragmentActivity {
         mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
         mPager.setOffscreenPageLimit(6);
         mPager.setAdapter(mPagerAdapter);
+        mPager.setCurrentItem(Integer.parseInt(session.currentactivity));
 
         tabLayout = (TabLayout) findViewById(R.id.tabbelanja);
         tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
