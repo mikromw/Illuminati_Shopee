@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
@@ -36,7 +35,8 @@
         android:id="@+id/linetop"
         android:background="#D3D3D3"
         android:layout_below="@+id/belanjaantitle"/>
-    <ImageView android:id="@+id/imageView1"
+
+    <ImageView android:id="@+id/targetimage"
         android:layout_height="100sp"
         android:src="@drawable/common_google_signin_btn_icon_dark"
         android:layout_width="100sp">
@@ -103,8 +103,8 @@
             android:layout_weight="1"
             android:text="Kategori"/>
         <EditText
-            android:textColor="#000"
             android:maxLength="15"
+            android:textColor="#000"
             android:layout_width="0sp"
             android:layout_height="50sp"
             android:layout_gravity="center"
@@ -144,8 +144,8 @@
             android:layout_weight="1"
             android:text="Harga"/>
         <EditText
-            android:maxLength="10"
             android:inputType="number"
+            android:maxLength="10"
             android:textColor="#000"
             android:layout_width="0sp"
             android:layout_height="50sp"
@@ -186,8 +186,8 @@
             android:layout_weight="1"
             android:text="Stock"/>
         <EditText
-            android:maxLength="5"
             android:inputType="number"
+            android:maxLength="5"
             android:textColor="#000"
             android:layout_width="0sp"
             android:layout_height="50sp"
@@ -228,8 +228,8 @@
             android:layout_weight="1"
             android:text="Berat"/>
         <EditText
-            android:maxLength="10"
             android:inputType="number"
+            android:maxLength="10"
             android:textColor="#000"
             android:layout_width="0sp"
             android:layout_height="50sp"

@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.activity_galery;
 import com.fake.shopee.shopeefake.camera_test;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -59,8 +60,15 @@ public class main_timeline extends Activity {
 
                         @Override
                         public void onClick(DialogInterface dialog, int position) {
-                            Intent a = new Intent(main_timeline.this, camera_test.class);
-                            startActivity(a);
+
+                            if(position==0) {
+                                Intent a = new Intent(main_timeline.this, camera_test.class);
+                                startActivity(a);
+                            }
+                            if(position==1) {
+                                Intent a = new Intent(main_timeline.this, activity_galery.class);
+                                startActivity(a);
+                            }
                             Toast.makeText(getApplicationContext(),"selected Item:"+position, Toast.LENGTH_SHORT).show();
                         }
 

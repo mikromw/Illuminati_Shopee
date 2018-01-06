@@ -19,11 +19,11 @@ public class camera_test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_test);
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
-        Button photoButton = (Button) this.findViewById(R.id.button1);
-        photoButton.setOnClickListener(new View.OnClickListener() {
-
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        imageView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(cameraIntent, CAMERA_REQUEST);
             }

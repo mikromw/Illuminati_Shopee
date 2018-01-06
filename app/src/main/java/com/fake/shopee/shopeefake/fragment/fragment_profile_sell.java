@@ -9,8 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.fake.shopee.shopeefake.Main_pages.main_notification;
 import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.activity_galery;
 import com.fake.shopee.shopeefake.camera_test;
 
 /**
@@ -41,8 +44,16 @@ public class fragment_profile_sell extends Fragment{
 
                     @Override
                     public void onClick(DialogInterface dialog, int position) {
-                        Intent a = new Intent(getActivity(), camera_test.class);
-                        startActivity(a);
+
+                        if(position==0) {
+                            Intent a = new Intent(getActivity(), camera_test.class);
+                            startActivity(a);
+                        }
+                        if(position==1) {
+                            Intent a = new Intent(getActivity(), activity_galery.class);
+                            startActivity(a);
+                        }
+                        Toast.makeText(getContext(),"selected Item:"+position, Toast.LENGTH_SHORT).show();
                     }
 
                 });
