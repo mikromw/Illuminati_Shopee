@@ -11,4 +11,7 @@
     <color name="WarnaTeks">#000</color>
     <color name="Gray">#efeded</color>
     <color name="WhiteColor">#fff</color>
+    <color name="black">#000</color>
+    <color name="white">#fff</color>
+    <color name="grey_dialog_box">#d3d3d3</color>
 </resources>

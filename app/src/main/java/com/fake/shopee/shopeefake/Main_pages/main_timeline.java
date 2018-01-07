@@ -54,7 +54,7 @@ public class main_timeline extends Activity {
                 @Override
                 public void onClick(View v) {
                     final CharSequence[] item = {"Kamera","Foto"};
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(main_timeline.this);
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(main_timeline.this,R.style.AppCompatAlertDialogStyle);
                     dialog.setTitle("Select");
                     dialog.setItems(item,new DialogInterface.OnClickListener() {
 

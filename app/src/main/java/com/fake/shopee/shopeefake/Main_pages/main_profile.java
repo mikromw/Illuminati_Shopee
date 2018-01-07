@@ -152,7 +152,7 @@ public class main_profile extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 final CharSequence[] item = {"Kamera","Foto"};
-                AlertDialog.Builder dialog = new AlertDialog.Builder(main_profile.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(main_profile.this,R.style.AppCompatAlertDialogStyle);
                 dialog.setTitle("Select");
                 dialog.setItems(item,new DialogInterface.OnClickListener() {
 

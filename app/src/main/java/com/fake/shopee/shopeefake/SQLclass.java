@@ -16,7 +16,7 @@ import java.sql.Statement;
 public class SQLclass {
 
     public String status = "";
-    public static String ip = "192.168.1.4";
+    public static String ip = "192.168.1.99";
     public static String driver = "net.sourceforge.jtds.jdbc.Driver";
     public static String db = "shopee";
     public static String un = "sa";
@@ -26,6 +26,7 @@ public class SQLclass {
 
     public SQLclass() {
     }
+
 
     @SuppressLint("NewApi")
     public Connection CONN(String Ip, String Db, String Un, String Password, String Port, String Instance) {

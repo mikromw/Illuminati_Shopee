@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
 
                 final CharSequence[] item = {"Kamera","Foto"};
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this,R.style.AppCompatAlertDialogStyle);
                 dialog.setTitle("Select");
                 dialog.setItems(item,new DialogInterface.OnClickListener() {
 

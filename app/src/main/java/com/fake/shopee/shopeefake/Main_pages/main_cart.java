@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class main_cart extends Activity {
 
     private FirebaseAuth mAuth;
+
     Button plus,minus;
     TextView angka;
     ImageButton backarrowiage;
@@ -73,6 +74,7 @@ public class main_cart extends Activity {
         if (currentUser==null){
             Intent i = new Intent(main_cart.this,loginactivity.class);
             startActivity(i);
+            finish();
         }
     }
 
