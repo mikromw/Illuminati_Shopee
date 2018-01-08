@@ -11,6 +11,8 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +31,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.pddstudio.urlshortener.URLShortener;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,10 +47,11 @@ public class activity_galery extends Activity {
 
     SQLclass sqlclass;
 
-    TextView textTargetUri;
-    EditText nameproduct;
+    TextView textTargetUri,numbercount;
+    EditText nameproduct,harga,berat,stock,kategori,keterangan;
     ImageView targetImage;
     Uri targetUri=null;
+    session_class session;
     ImageButton backarrow,done;
     private StorageReference mStorageRef;
 
@@ -68,17 +74,26 @@ public class activity_galery extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galery);
-        try {
-            Connection con = sqlclass.CONN(SQLclass.ip, SQLclass.db, SQLclass.un, SQLclass.password, SQLclass.port, SQLclass.instance);
-        }catch (Exception e){
-            Log.e("erro",e.toString());
-        }
+
         sqlclass = new SQLclass();
+
+         session= new session_class(this);
+
         mAuth = FirebaseAuth.getInstance();
+
         nameproduct =(EditText) findViewById(R.id.namaproduk);
+        harga = (EditText) findViewById(R.id.hargagalery);
+        stock =(EditText) findViewById(R.id.stockgalery);
+        berat =(EditText) findViewById(R.id.beratgalery);
+        kategori = (EditText) findViewById(R.id.kategorigalery);
+        numbercount = (TextView) findViewById(R.id.numbercountgalery);
+        keterangan = (EditText)  findViewById(R.id.keterangangalery);
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
+
         backarrow = (ImageButton) findViewById(R.id.backarrow);
         done = (ImageButton) findViewById(R.id.donegalery);
+
         targetImage = (ImageView)findViewById(R.id.targetimage);
         if(mAuth.getCurrentUser()==null){
 
@@ -88,6 +103,7 @@ public class activity_galery extends Activity {
                     android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, 0);
         }
+        nameproduct.addTextChangedListener(mTextEditorWatcher);
         targetImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,8 +115,13 @@ public class activity_galery extends Activity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                YourAsyncTask b = new YourAsyncTask(activity_galery.this);
-                b.execute();
+                if(nameproduct.getText().toString().trim().equals("")){
+                Toast.makeText(getApplicationContext(),"Nama produk harus Diisi",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    YourAsyncTask b = new YourAsyncTask(activity_galery.this);
+                    b.execute();
+                }
             }
         });
     }
@@ -138,9 +159,9 @@ public class activity_galery extends Activity {
 
         protected Void doInBackground(Void... args) {
             Log.e("erro",targetUri.getPath());
-            String temp=nameproduct.getText().toString();
+            final String temp=nameproduct.getText().toString();
 
-            String referencename = temp;
+            final String referencename = temp;
             StorageReference riversRef = mStorageRef.child(referencename+".jpg");
 
             riversRef.putFile(targetUri)
@@ -149,6 +170,21 @@ public class activity_galery extends Activity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Get a URL to the uploaded content
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            ResultSet count = sqlclass.querydata("select count(stock_id) as jumlah from stock");
+                            try{
+                                int a=0;
+                                while (count.next()){
+                                    a = count.getInt("jumlah");
+                                }
+                                String tempa = URLShortener.shortUrl(downloadUrl.toString()).substring(8);;
+                                String b ="insert into stock values("+a+","+tempa+",'"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')";
+                                Log.e("b", b.toString());
+                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')");
+                                Log.e("data sql",String.valueOf(result));
+                                Log.e("data sql",tempa);
+                            }catch (Exception e){
+                                Log.e("SQL ERROR",e.getMessage());
+                            }
                             Log.e("picture",downloadUrl.toString());
                             onPostExecute(true,"Success");
                         }
@@ -177,4 +213,17 @@ public class activity_galery extends Activity {
             }
         }
     }
+
+    private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //This sets a textview to the current length
+            numbercount.setText(String.valueOf(s.length())+" / 100");
+        }
+
+        public void afterTextChanged(Editable s) {
+        }
+    };
 }

@@ -9,12 +9,15 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.Main_pages.loginactivity;
@@ -33,9 +36,10 @@ public class camera_test extends Activity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
     ImageView done;
+    TextView numbercount;
     Uri targetUri=null;
     private StorageReference mStorageRef;
-    EditText nameproduct;
+    EditText nameproduct,harga,berat,stock;
     byte[] tempupload=null;
 
     public void onStart() {
@@ -59,6 +63,10 @@ public class camera_test extends Activity {
 
         mAuth = FirebaseAuth.getInstance();
         nameproduct=(EditText) findViewById(R.id.namaprodukcamera);
+        harga = (EditText) findViewById(R.id.hargacamera);
+        numbercount = (TextView) findViewById(R.id.numbercount);
+        stock =(EditText) findViewById(R.id.stockcamera);
+        berat =(EditText) findViewById(R.id.beratcamera);
         done = (ImageButton) findViewById(R.id.donecamera);
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
 
@@ -150,4 +158,16 @@ public class camera_test extends Activity {
             }
         }
     }
+    private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            //This sets a textview to the current length
+            numbercount.setText(String.valueOf(s.length())+" / 100");
+        }
+
+        public void afterTextChanged(Editable s) {
+        }
+    };
 }

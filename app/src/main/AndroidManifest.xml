@@ -75,6 +75,9 @@
             android:screenOrientation="portrait"
             android:theme="@style/noanimation">
         </activity>
+        <activity android:name=".Admin.AdminActivity" />
+        <activity android:name=".Admin.DiskonDashboardActivity" />
+        <activity android:name=".Admin.DiskonEditActivity"></activity>
     </application>
 
 </manifest>

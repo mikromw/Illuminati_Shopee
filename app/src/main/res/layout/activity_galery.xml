@@ -71,15 +71,38 @@
         <TextView
             android:layout_width="0sp"
             android:layout_height="match_parent"
-            android:layout_weight="0.15"
+            android:layout_weight="0.3"
             android:gravity="center"
-            android:id="@+id/numbercount"
+            android:id="@+id/numbercountgalery"
             android:text="0 / 100"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:id="@+id/linethree"
+        android:background="#D3D3D3"
+        android:layout_below="@+id/ll2"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <EditText
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:maxLength="500"
+            android:textColor="#000"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/keterangangalery"
+            android:gravity="start"
+            android:background="@android:color/transparent"
+            android:hint="Keterangan"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/linethreehalf"
         android:background="#D3D3D3"
         android:layout_below="@+id/ll2"/>
     <LinearLayout
@@ -109,6 +132,7 @@
             android:textColor="#000"
             android:layout_width="0sp"
             android:layout_height="50sp"
+            android:id="@+id/kategorigalery"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:textAlignment="textEnd"
@@ -149,6 +173,7 @@
             android:inputType="number"
             android:maxLength="10"
             android:textColor="#000"
+            android:id="@+id/hargagalery"
             android:layout_width="0sp"
             android:layout_height="50sp"
             android:layout_gravity="center"
@@ -192,6 +217,7 @@
             android:maxLength="5"
             android:textColor="#000"
             android:layout_width="0sp"
+            android:id="@+id/stockgalery"
             android:layout_height="50sp"
             android:layout_gravity="center"
             android:layout_weight="1"
@@ -234,6 +260,7 @@
             android:maxLength="10"
             android:textColor="#000"
             android:layout_width="0sp"
+            android:id="@+id/beratgalery"
             android:layout_height="50sp"
             android:layout_gravity="center"
             android:layout_weight="1"

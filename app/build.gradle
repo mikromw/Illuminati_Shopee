@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'com.pddstudio:urlshortener:1.0.2'
     implementation 'com.google.firebase:firebase-storage:11.0.4'
     implementation 'com.google.firebase:firebase-auth:11.0.4'
     implementation 'com.google.firebase:firebase-database:11.0.4'

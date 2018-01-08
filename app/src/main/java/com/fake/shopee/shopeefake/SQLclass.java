@@ -23,8 +23,13 @@ public class SQLclass {
     public static String password = "12345";
     public static String port = "";
     public static String instance="";
+    Connection conn = null;
+
 
     public SQLclass() {
+        if(conn==null){
+            conn=CONN(ip,db,un,password,port,instance);
+        }
     }
 
 
@@ -34,13 +39,13 @@ public class SQLclass {
         db = Db;
         un = Un;
         port=Port;
+        String ConnURL = null;
         password = Password;
         instance=Instance;
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        Connection conn = null;
-        String ConnURL = null;
+
         try {
             Class.forName(driver);
             if ((instance != "") && (port.equals(""))){

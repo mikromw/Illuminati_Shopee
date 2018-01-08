@@ -55,20 +55,13 @@ public class fragment_login extends Fragment{
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (isvalidemail(email.getText().toString()) && isvalidpassword(pass.getText().toString())){
+                if (isvalidemail(email.getText().toString())){
                     DoLogin doLogin = new DoLogin();
                     doLogin.execute("");
                 }
-                else if(isvalidemail(email.getText().toString())==false) {
+                else
+                    {
                     Toast.makeText(getActivity(), "Bad Email",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else if(isvalidpassword(pass.getText().toString())==false) {
-                    Toast.makeText(getActivity(), "Bad password",
-                            Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(getActivity(), "Bad password",
                             Toast.LENGTH_SHORT).show();
                 }
             }
