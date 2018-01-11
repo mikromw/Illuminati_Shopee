@@ -1,19 +1,19 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.upload;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,14 +21,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.Main_pages.loginactivity;
+import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.SQLclass;
+import com.fake.shopee.shopeefake.session_class;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.pddstudio.urlshortener.URLShortener;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.ResultSet;
 
 
 public class camera_test extends Activity {
@@ -36,10 +42,12 @@ public class camera_test extends Activity {
     private static final int CAMERA_REQUEST = 1888;
     private ImageView imageView;
     ImageView done;
+    SQLclass sqlclass;
     TextView numbercount;
+    session_class session;
     Uri targetUri=null;
     private StorageReference mStorageRef;
-    EditText nameproduct,harga,berat,stock;
+    EditText nameproduct,harga,berat,stock,kategori,keterangan;
     byte[] tempupload=null;
 
     public void onStart() {
@@ -61,14 +69,23 @@ public class camera_test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera_test);
 
+        sqlclass = new SQLclass();
+
+        session = new session_class(this);
+
         mAuth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
+        kategori = (EditText) findViewById(R.id.kategoricamera);
         nameproduct=(EditText) findViewById(R.id.namaprodukcamera);
         harga = (EditText) findViewById(R.id.hargacamera);
         numbercount = (TextView) findViewById(R.id.numbercount);
         stock =(EditText) findViewById(R.id.stockcamera);
         berat =(EditText) findViewById(R.id.beratcamera);
         done = (ImageButton) findViewById(R.id.donecamera);
+        keterangan = (EditText)  findViewById(R.id.keterangancamera);
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
+
 
         if(mAuth.getCurrentUser()==null){
 
@@ -96,15 +113,22 @@ public class camera_test extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
+            targetUri = getImageUri(getApplicationContext(), photo);
             imageView.setImageBitmap(photo);
             imageView.setDrawingCacheEnabled(true);
             imageView.buildDrawingCache();
             Bitmap bitmap = imageView.getDrawingCache();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            tempupload = baos.toByteArray();
         }
     }
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(),
+                inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
     private class YourAsyncTask extends AsyncTask<Void, Void, Void> {
         private ProgressDialog dialog;
 
@@ -119,18 +143,34 @@ public class camera_test extends Activity {
         }
 
         protected Void doInBackground(Void... args) {
-            Log.e("erro", targetUri.getPath());
             String temp = nameproduct.getText().toString();
 
             String referencename = temp;
             StorageReference riversRef = mStorageRef.child(referencename + ".jpg");
 
-            riversRef.putBytes(tempupload)
+            riversRef.putFile(targetUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // Get a URL to the uploaded content
                             Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            ResultSet count = sqlclass.querydata("select count(stock_id) as jumlah from stock");
+                            try{
+                                int a=0;
+                                while (count.next()){
+                                    a = count.getInt("jumlah");
+                                }
+                                String tempa = URLShortener.shortUrl(downloadUrl.toString()).substring(8);;
+                                String b ="insert into stock values("+a+","+tempa+",'"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')";
+                                Log.e("b", b.toString());
+                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')");
+                                Log.e("data sql",String.valueOf(result));
+                                Log.e("data sql",tempa);
+                            }catch (Exception e){
+                                Log.e("SQL ERROR",e.getMessage());
+                            }
+                            Log.e("picture",downloadUrl.toString());
+                            onPostExecute(true,"Success");
                             Log.e("picture", downloadUrl.toString());
                             onPostExecute(true, "Success");
                         }

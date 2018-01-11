@@ -11,10 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.fake.shopee.shopeefake.Main_pages.main_notification;
 import com.fake.shopee.shopeefake.R;
-import com.fake.shopee.shopeefake.activity_galery;
-import com.fake.shopee.shopeefake.camera_test;
+import com.fake.shopee.shopeefake.upload.activity_galery;
+import com.fake.shopee.shopeefake.upload.camera_test;
 
 /**
  * Created by Riandy on 12/1/2017.

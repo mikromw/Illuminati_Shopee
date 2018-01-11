@@ -23,7 +23,7 @@
         android:supportsRtl="true">
         <activity
             android:name=".Main_pages.MainActivity"
-            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait"
             android:theme="@style/noanimation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,7 +44,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/noanimation" />
         <activity
-            android:name=".camera_test"
+            android:name=".upload.camera_test"
             android:screenOrientation="portrait"
             android:theme="@style/noanimation" />
         <activity
@@ -58,8 +58,8 @@
             android:theme="@style/noanimation" />
         <activity
             android:name=".sample"
-            android:screenOrientation="portrait"
             android:label="@string/title_activity_sample"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ProductSearch.ProductSearchActivity"
@@ -69,15 +69,15 @@
         <activity
             android:name=".Main_pages.main_belanjaanku"
             android:screenOrientation="portrait"
-            android:theme="@style/noanimation">
-        </activity>
-        <activity android:name=".activity_galery"
+            android:theme="@style/noanimation"></activity>
+        <activity
+            android:name=".upload.activity_galery"
             android:screenOrientation="portrait"
-            android:theme="@style/noanimation">
-        </activity>
+            android:theme="@style/noanimation"></activity>
         <activity android:name=".Admin.AdminActivity" />
         <activity android:name=".Admin.DiskonDashboardActivity" />
-        <activity android:name=".Admin.DiskonEditActivity"></activity>
+        <activity android:name=".Admin.DiskonEditActivity" />
+        <activity android:name=".searching"></activity>
     </application>
 
 </manifest>
