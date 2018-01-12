@@ -69,15 +69,19 @@
         <activity
             android:name=".Main_pages.main_belanjaanku"
             android:screenOrientation="portrait"
-            android:theme="@style/noanimation"></activity>
+            android:theme="@style/noanimation" />
         <activity
             android:name=".upload.activity_galery"
             android:screenOrientation="portrait"
-            android:theme="@style/noanimation"></activity>
+            android:theme="@style/noanimation" />
         <activity android:name=".Admin.AdminActivity" />
         <activity android:name=".Admin.DiskonDashboardActivity" />
         <activity android:name=".Admin.DiskonEditActivity" />
-        <activity android:name=".searching"></activity>
+        <activity
+            android:name=".searching"
+            android:screenOrientation="portrait"
+            android:theme="@style/noanimation" />
+        <activity android:name=".searchresult"></activity>
     </application>
 
 </manifest>
