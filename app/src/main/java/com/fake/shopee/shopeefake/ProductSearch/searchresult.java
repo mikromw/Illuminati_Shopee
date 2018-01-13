@@ -99,22 +99,7 @@ public class searchresult extends AppCompatActivity {
 
     }
     private void prepareMovieData() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ResultSet result = sqlclass.querydata("select * from stock");
-                try {
-                    while (result.next()){
-                        result movie = new result(result.getInt("likecount"),result.getInt("harga"),result.getString("imagedir"),result.getString("namaproduk"));
-                        movieList.add(movie);
-                    }
-                }catch (Exception e){
-                    Log.e("error occured",e.getMessage());
-                }
-                mAdapter.notifyDataSetChanged();
-
-            }
-        });
+            mAdapter.notifyDataSetChanged();
        // result movie = new result("Mad Max: Fury Road", "Action & Adventure", "2015");
        // movieList.add(movie);
 
@@ -134,6 +119,22 @@ public class searchresult extends AppCompatActivity {
         }
 
         protected Void doInBackground(Void... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ResultSet result = sqlclass.querydata("select * from stock");
+                    try {
+                        while (result.next()){
+                            result movie = new result(result.getInt("likecount"),result.getInt("harga"),result.getString("imagedir"),result.getString("namaproduk"));
+                            movieList.add(movie);
+                        }
+                    }catch (Exception e){
+                        Log.e("error occured",e.getMessage());
+                    }
+
+
+                }
+            });
             prepareMovieData();
             onPostExecute(true,"completed");
             return null;
