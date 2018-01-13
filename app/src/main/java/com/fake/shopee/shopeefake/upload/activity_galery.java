@@ -44,6 +44,7 @@ public class activity_galery extends Activity {
     TextView textTargetUri,numbercount;
     EditText nameproduct,harga,berat,stock,kategori,keterangan;
     ImageView targetImage;
+    boolean data=false;
     Uri targetUri=null;
     session_class session;
     ImageButton backarrow,done;
@@ -88,6 +89,10 @@ public class activity_galery extends Activity {
         backarrow = (ImageButton) findViewById(R.id.backarrow);
         done = (ImageButton) findViewById(R.id.donegalery);
 
+        if (!nameproduct.getText().toString().trim().equals("") && !kategori.getText().toString().trim().equals("") && !berat.getText().toString().trim().equals("") && !harga.getText().toString().trim().equals("") && !stock.getText().toString().trim().equals("") && !keterangan.getText().toString().trim().equals("")){
+            data=true;
+        }
+
         targetImage = (ImageView)findViewById(R.id.targetimage);
         if(mAuth.getCurrentUser()==null){
 
@@ -109,8 +114,8 @@ public class activity_galery extends Activity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(nameproduct.getText().toString().trim().equals("")){
-                Toast.makeText(getApplicationContext(),"Nama produk harus Diisi",Toast.LENGTH_SHORT).show();
+                if (nameproduct.getText().toString().trim().equals("") || kategori.getText().toString().trim().equals("") || berat.getText().toString().trim().equals("") || harga.getText().toString().trim().equals("") || stock.getText().toString().trim().equals("") || keterangan.getText().toString().trim().equals("")){
+                    Toast.makeText(getApplicationContext(),"Data Tidak lengkap",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     YourAsyncTask b = new YourAsyncTask(activity_galery.this);
@@ -170,22 +175,24 @@ public class activity_galery extends Activity {
                                 while (count.next()){
                                     a = count.getInt("jumlah");
                                 }
-                                String tempa = URLShortener.shortUrl(downloadUrl.toString()).substring(8);;
-                                String b ="insert into stock values("+a+","+tempa+",'"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')";
+                                String tempa = URLShortener.shortUrl(downloadUrl.toString());
+                                String b ="insert into stock values("+a+","+tempa+",'"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)";
                                 Log.e("b", b.toString());
-                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')");
+                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)");
                                 Log.e("data sql",String.valueOf(result));
                                 Log.e("data sql",tempa);
                             }catch (Exception e){
                                 Log.e("SQL ERROR",e.getMessage());
                             }
                             Log.e("picture",downloadUrl.toString());
+                            data=true;
                             onPostExecute(true,"Success");
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception exception) {
+                            data=false;
                             // Handle unsuccessful uploads
                             onPostExecute(false,"failed");
                         }

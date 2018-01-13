@@ -43,6 +43,7 @@ public class camera_test extends Activity {
     private ImageView imageView;
     ImageView done;
     SQLclass sqlclass;
+    boolean data=false;
     TextView numbercount;
     session_class session;
     Uri targetUri=null;
@@ -87,6 +88,8 @@ public class camera_test extends Activity {
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
 
 
+
+
         if(mAuth.getCurrentUser()==null){
 
         }
@@ -104,8 +107,13 @@ public class camera_test extends Activity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                YourAsyncTask b = new YourAsyncTask(camera_test.this);
-                b.execute();
+                if (nameproduct.getText().toString().trim().equals("") || kategori.getText().toString().trim().equals("") || berat.getText().toString().trim().equals("") || harga.getText().toString().trim().equals("") || stock.getText().toString().trim().equals("") || keterangan.getText().toString().trim().equals("")){
+                        Toast.makeText(getApplicationContext(),"Data Tidak lengkap",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    YourAsyncTask b = new YourAsyncTask(camera_test.this);
+                    b.execute();
+                }
             }
         });
     }
@@ -160,10 +168,10 @@ public class camera_test extends Activity {
                                 while (count.next()){
                                     a = count.getInt("jumlah");
                                 }
-                                String tempa = URLShortener.shortUrl(downloadUrl.toString()).substring(8);;
-                                String b ="insert into stock values("+a+","+tempa+",'"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')";
+                                String tempa = URLShortener.shortUrl(downloadUrl.toString());
+                                String b ="insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)";
                                 Log.e("b", b.toString());
-                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"')");
+                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)");
                                 Log.e("data sql",String.valueOf(result));
                                 Log.e("data sql",tempa);
                             }catch (Exception e){

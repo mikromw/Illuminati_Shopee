@@ -3,12 +3,14 @@ package com.fake.shopee.shopeefake.Main_pages;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.fake.shopee.shopeefake.ProductSearch.searching;
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.upload.activity_galery;
 import com.fake.shopee.shopeefake.upload.camera_test;
@@ -18,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends Activity {
 
-    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart;
+    ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart,mainsearch;
     session_class session;
 
     private FirebaseAuth mAuth;
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
         mainnotif = (ImageButton) findViewById(R.id.mainnotif);
         mainprofile = (ImageButton) findViewById(R.id.mainprofile);
         maincart = (ImageButton) findViewById(R.id.maincart);
+        mainsearch = (ImageButton) findViewById(R.id.mainsearchbox);
 
         mainhome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +111,14 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this , main_cart.class);
+                startActivity(i);
+            }
+        });
+
+        mainsearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this , searching.class);
                 startActivity(i);
             }
         });
