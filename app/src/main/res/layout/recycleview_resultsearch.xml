@@ -16,7 +16,7 @@
             <ImageView
                 android:id="@+id/image_namaproduk"
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="150dp"
                 android:scaleType="fitXY"
                 android:background="@color/Gray" />
             <TextView
@@ -25,9 +25,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/nama_produk"
                 android:textColor="@color/WarnaTeks"
-                android:textSize="16sp"
-                android:layout_marginTop="12sp"
-                android:layout_marginLeft="12dp"
+                android:textSize="10sp"
+                android:layout_marginTop="8sp"
+                android:layout_marginLeft="8dp"
                 android:layout_below="@id/image_namaproduk"/>
             <TextView
                 android:id="@+id/hargaproduk"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:textSize="12sp"
+                android:textSize="8sp"
                 android:text="@string/harga_produk"
                 android:textColor="@color/ColorPrimary"
                 android:layout_height="wrap_content" />
@@ -46,11 +46,11 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
-                android:textSize="12sp"
+                android:textSize="8sp"
                 android:drawablePadding="4sp"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:drawableLeft="@drawable/ic_like"/>
+                android:drawableLeft="@drawable/like_tap"/>
 
             <TextView
                 android:layout_width="wrap_content"

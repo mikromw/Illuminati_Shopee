@@ -49,10 +49,10 @@
         android:id="@+id/linetop"
         android:background="#D3D3D3"
         android:layout_below="@+id/mmtop1"/>
-    <Button
+    <ToggleButton
         android:layout_width="match_parent"
         android:layout_below="@id/linetop"
-        android:text="Harga dari termurah"
+        android:text="Urutkan Harga"
         android:id="@+id/lowhigh"
         android:background="@color/colorPrimary"
         android:textColor="@color/ColorPrimary"

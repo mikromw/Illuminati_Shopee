@@ -13,11 +13,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.SQLclass;
@@ -29,6 +31,8 @@ import com.google.firebase.storage.UploadTask;
 import com.pddstudio.urlshortener.URLShortener;
 
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +43,7 @@ public class searchresult extends AppCompatActivity {
     private RecyclerView recyclerView;
     private String passedkey;
     Button closeback ;
+    ToggleButton toggleprice;
     EditText searchbox;
     ImageButton searchback;
     SQLclass sqlclass;
@@ -62,10 +67,27 @@ public class searchresult extends AppCompatActivity {
         closeback = (Button) findViewById(R.id.resultbackback);
         searchbox = (EditText) findViewById(R.id.resultsearchbox);
         searchback = (ImageButton) findViewById(R.id.resultback);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        toggleprice = (ToggleButton) findViewById(R.id.lowhigh);
+        toggleprice.setText("Aktifkan Filter Harga");
+
+
+        toggleprice.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if (toggleprice.isChecked()==(true)) {
+                    toggleprice.setText("Harga dari Termurah");
+                }
+                else {
+                    toggleprice.setText("Harga dari Termahal");
+                }
+            }
+        });
+
 
         searchbox.setText(passedkey);
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
         searchbox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +115,10 @@ public class searchresult extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+
+
+
 
         YourAsyncTask a = new YourAsyncTask(this);
         a.execute();
@@ -122,10 +148,12 @@ public class searchresult extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ResultSet result = sqlclass.querydata("select * from stock");
+                    ResultSet result = sqlclass.querydata("select * from stock where namaproduk like '%"+passedkey+"%'");
+                    NumberFormat formatter = new DecimalFormat("#,###,###");
+                    String yourFormattedString="";
                     try {
                         while (result.next()){
-                            result movie = new result(result.getInt("likecount"),result.getInt("harga"),result.getString("imagedir"),result.getString("namaproduk"));
+                            result movie = new result(result.getInt("likecount"),result.getString("harga"),result.getString("imagedir"),result.getString("namaproduk"));
                             movieList.add(movie);
                         }
                     }catch (Exception e){

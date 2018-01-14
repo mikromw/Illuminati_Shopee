@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.fake.shopee.shopeefake.Main_pages.loginactivity;
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.SQLclass;
+import com.fake.shopee.shopeefake.formula.thousandedittext;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -83,6 +84,9 @@ public class camera_test extends Activity {
         numbercount = (TextView) findViewById(R.id.numbercount);
         stock =(EditText) findViewById(R.id.stockcamera);
         berat =(EditText) findViewById(R.id.beratcamera);
+
+        harga.addTextChangedListener(new thousandedittext(harga));
+
         done = (ImageButton) findViewById(R.id.donecamera);
         keterangan = (EditText)  findViewById(R.id.keterangancamera);
         this.imageView = (ImageView)this.findViewById(R.id.imageView1);
@@ -169,9 +173,9 @@ public class camera_test extends Activity {
                                     a = count.getInt("jumlah");
                                 }
                                 String tempa = URLShortener.shortUrl(downloadUrl.toString());
-                                String b ="insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)";
+                                String b ="insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"','"+harga.getText().toString().substring(3)+"',"+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)";
                                 Log.e("b", b.toString());
-                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"',"+Integer.parseInt(harga.getText().toString())+","+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)");
+                                int result = sqlclass.queryexecute("insert into stock values("+a+",'"+tempa+"','"+nameproduct.getText().toString()+"','"+harga.getText().toString()+"',"+Integer.parseInt(stock.getText().toString())+",'"+kategori.getText().toString()+"','"+session.getusename()+"','"+berat.getText().toString()+"','"+keterangan.getText().toString()+"',0)");
                                 Log.e("data sql",String.valueOf(result));
                                 Log.e("data sql",tempa);
                             }catch (Exception e){

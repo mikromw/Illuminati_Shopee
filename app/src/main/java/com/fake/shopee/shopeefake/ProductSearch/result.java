@@ -1,7 +1,5 @@
 package com.fake.shopee.shopeefake.ProductSearch;
 
-import java.security.PrivateKey;
-
 /**
  * Created by riandy on 1/13/2018.
  */
@@ -9,13 +7,13 @@ import java.security.PrivateKey;
 public class result {
     private int likecount;
     private String nama;
-    private int harga;
+    private String harga;
     private String imagedir;
 
     public result() {
     }
 
-    public result(int likecount,int harga,String imagedir,String nama) {
+    public result(int likecount,String harga,String imagedir,String nama) {
         this.likecount = likecount;
         this.imagedir = imagedir;
         this.harga = harga;
@@ -45,11 +43,11 @@ public class result {
         this.nama = name;
     }
 
-    public int getHarga() {
+    public String getHarga() {
         return harga;
     }
 
-    public void setHarga(int likecount) {
+    public void setHarga(String likecount) {
         this.harga = likecount;
     }
 }
