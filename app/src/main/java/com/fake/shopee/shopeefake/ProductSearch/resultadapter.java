@@ -26,10 +26,6 @@ public class resultadapter extends RecyclerView.Adapter<resultadapter.MyViewHold
 
         private List<result> results;
 
-        public interface OnItemClickListener {
-        void onItemClick(result item);
-        }
-
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             public TextView nama , harga , likecount;

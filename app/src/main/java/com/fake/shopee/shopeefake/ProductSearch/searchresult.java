@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.renderscript.Sampler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,11 +19,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.SQLclass;
+import com.fake.shopee.shopeefake.stock_detail;
 import com.fake.shopee.shopeefake.upload.camera_test;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -116,9 +119,22 @@ public class searchresult extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
+        recyclerView.addOnItemTouchListener(new searchresultlistener(getApplicationContext(), recyclerView, new searchresultlistener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                result movie = movieList.get(position);
+                movie.setLikecount(movie.getLikecount()+1);
+                Intent z = new Intent(searchresult.this, stock_detail.class);
+                z.putExtra("request",movie.getNama());
+                startActivity(z);
+               // Toast.makeText(getApplicationContext(), movie.getTitle() + " is selected!", Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onLongClick(View view, int position) {
 
-
+            }
+        }));
 
         YourAsyncTask a = new YourAsyncTask(this);
         a.execute();

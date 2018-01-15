@@ -1,9 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.fake.shopee.shopeefake.stock_detail">
+    tools:context="com.fake.shopee.shopeefake.ProductSearch.searchresult">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48sp"
+        android:id="@+id/mmtop1"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/resultback"
+            android:layout_weight="0.15"
+            android:layout_width="0dp"
+            android:layout_height="35sp"
+            android:layout_marginLeft="3pt"
+            android:layout_gravity="center"
+            android:background="@drawable/backarrow"
+            />
+        <TextView
+            android:singleLine="true"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textSize="8pt"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_width="0sp"
+            android:id="@+id/resultsearchbox"
+            android:layout_height="90px"
+            android:text="data error"
+            android:hint="Search Products and Shop"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:layout_weight="1">
+        </TextView>
+        <Button
+            android:layout_width="0sp"
+            android:id="@+id/resultbackback"
+            android:background="@drawable/cart"
+            android:layout_height="15pt"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:id="@+id/linetop"
+        android:background="#D3D3D3"
+        android:layout_below="@+id/mmtop1"/>
+
+    <ImageView
+        android:id="@+id/imagestock"
+        android:layout_width="match_parent"
+        android:layout_height="300sp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/mmtop1"
+        android:layout_weight="1" />
+    <LinearLayout
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/ll12"
+        android:layout_below="@id/imagestock">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/nama_produk"
+                android:paddingBottom="10sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:layout_width="wrap_content"
+                android:text="@string/harga"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:orientation="horizontal">
+                <TextView
+                    android:paddingLeft="8sp"
+                    android:gravity="center"
+                    android:layout_width="0sp"
+                    android:textAlignment="textStart"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:text="Koin Shopee"/>
+                <ImageView
+                    android:layout_width="0sp"
+                    android:layout_weight="0.1"
+                    android:layout_height="30sp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/coin"/>
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:text="dapatkan"/>
+                <ImageView
+                    android:layout_width="0sp"
+                    android:layout_weight="0.1"
+                    android:layout_height="30sp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/arrow"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll12"
+        android:background="@color/ColorPrimary"
+        android:text="Beli Sekarang"
+        android:textColor="@color/white" />
+</RelativeLayout>
