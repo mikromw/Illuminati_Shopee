@@ -29,12 +29,6 @@
             android:id="@+id/notifcart"
             android:background="@drawable/cart"
             />
-        <ImageButton
-            android:layout_weight="0.45"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/chat"
-            />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
