@@ -72,7 +72,7 @@
 
             <ImageView
                 android:background="#fff"
-                android:id="@+id/imagestock"
+                android:id="@+id/detailimage"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_alignParentStart="true"
@@ -82,7 +82,7 @@
                 android:id="@+id/ll12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/imagestock"
+                android:layout_below="@id/detailimage"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -95,6 +95,10 @@
                         android:layout_width="match_parent"
                         android:paddingLeft="10dp"
                         android:background="#fff"
+                        android:gravity="center"
+                        android:paddingTop="6dp"
+                        android:id="@+id/detailproduk"
+                        android:textAlignment="textStart"
                         android:layout_height="wrap_content"
                         android:paddingBottom="10sp"
                         android:text="@string/nama_produk"
@@ -104,6 +108,7 @@
                         android:layout_width="match_parent"
                         android:paddingLeft="10dp"
                         android:background="#fff"
+                        android:id="@+id/detailharga"
                         android:layout_height="wrap_content"
                         android:text="@string/harga"
                         android:textColor="@color/colorAccent" />
@@ -135,6 +140,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="0.5"
                             android:gravity="center"
+                            android:id="@+id/detailkoin"
                             android:text="dapatkan" />
 
                         <ImageView
@@ -163,6 +169,7 @@
                         android:background="@drawable/profile2"
                         android:visibility="visible"></ImageView>
                     <TextView
+                        android:id="@+id/detailpenjual"
                         android:layout_width="0sp"
                         android:layout_weight="1"
                         android:layout_height="match_parent"
@@ -194,37 +201,92 @@
                         android:paddingBottom="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/keterangancamera"
+                        android:id="@+id/detailketerangan"
                         android:gravity="start"
                         android:text="keterangan"
                         android:background="@android:color/transparent"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="1dp"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:background="@color/white"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <TextView
-                        android:paddingTop="8dp"
-                        android:paddingLeft="6dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rincian Produk"/>
-                    <TextView
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="10dp"
-                        android:maxLength="500"
-                        android:textColor="#000"
-                        android:paddingBottom="10dp"
+                        android:layout_height="50sp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:layout_marginRight="1sp"
+                            android:gravity="center"
+                            android:text="Kategori"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:layout_width="0sp"
+                            android:id="@+id/detailkategori"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/white"
+                            android:text="data kategori"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:id="@+id/keterangancamera"
-                        android:gravity="start"
-                        android:text="keterangan"
-                        android:background="@android:color/transparent"/>
+                        android:layout_height="50sp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:layout_marginRight="1sp"
+                            android:gravity="center"
+                            android:text="Stock"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/detailstok"
+                            android:layout_width="0sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/white"
+                            android:text="data Stock"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="1dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50sp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0sp"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:layout_marginRight="1sp"
+                            android:gravity="center"
+                            android:text="Berat"
+                            android:layout_height="match_parent" />
+                        <TextView
+                            android:id="@+id/detailberat"
+                            android:layout_width="0sp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:background="@color/white"
+                            android:text="data Berat"
+                            android:layout_height="match_parent" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

@@ -42,7 +42,7 @@
         android:layout_below="@+id/linetop"
         android:layout_above="@id/linebottom"
         android:background="#fff">
-
+        <include layout="@layout/layout_notiflogin" ></include>
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
