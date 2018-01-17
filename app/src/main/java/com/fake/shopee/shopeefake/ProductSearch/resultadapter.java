@@ -11,15 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fake.shopee.shopeefake.R;
-import com.fake.shopee.shopeefake.stock_detail;
 import com.squareup.picasso.Picasso;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class resultadapter extends RecyclerView.Adapter<resultadapter.MyViewHolder> {

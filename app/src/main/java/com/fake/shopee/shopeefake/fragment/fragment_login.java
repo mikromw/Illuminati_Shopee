@@ -1,6 +1,8 @@
 package com.fake.shopee.shopeefake.fragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -9,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +19,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.fake.shopee.shopeefake.Admin.AdminActivity;
 import com.fake.shopee.shopeefake.Main_pages.main_profile;
 import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.SQLclass;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +30,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,12 +46,14 @@ public class fragment_login extends Fragment{
     Button btnlogin;
     private FirebaseAuth mAuth;
     ProgressDialog dialog;
-
+    SQLclass sqLclass;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
+        sqLclass = new SQLclass();
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_login, container, false);
         email = (EditText) rootView.findViewById(R.id.emaillogin);
@@ -66,6 +74,8 @@ public class fragment_login extends Fragment{
                 }
             }
         });
+
+
 
         return rootView;
     }
@@ -89,8 +99,16 @@ public class fragment_login extends Fragment{
             }
             Toast.makeText(getActivity(), r, Toast.LENGTH_SHORT).show();
             if (isSuccess) {
-                Intent i = new Intent(getActivity(), main_profile.class);
-                startActivity(i);
+                if(session_class.tempcommand==0){
+                    Intent i = new Intent(getActivity(), main_profile.class);
+                    startActivity(i);
+                    getActivity().finish();
+                }
+                else {
+                    Intent i = new Intent(getActivity(), AdminActivity.class);
+                    startActivity(i);
+                    getActivity().finish();
+                }
             }
         }
 
@@ -104,12 +122,71 @@ public class fragment_login extends Fragment{
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
+                                final FirebaseUser user = mAuth.getCurrentUser();
                                 session_class session= new session_class(getActivity());
                                 session.setusename(user.getEmail());
-                                z="Signed in As "+user.getEmail();
-                                isSuccess=true;
-                                onPostExecute(z);
+                                int admindata=0;
+
+                                ResultSet check = sqLclass.querydata("select * from xuser where pemilik='"+user.getEmail()+"'");
+                                try{
+                                    int calc=0;
+                                    while (check.next()){
+                                        calc++;
+                                        admindata=check.getInt("status");
+                                    }
+                                    if(calc==0){
+                                        int register = sqLclass.queryexecute("insert into xuser values('"+user.getEmail()+"',0,0,'',0,0,getdate())");
+                                        if(register>0){
+                                            z="Signed in As "+user.getEmail();
+                                            session_class.tempcommand=0;
+                                            isSuccess=true;
+                                            onPostExecute(z);
+                                        }
+                                        else {
+                                            z="sqlerror";
+                                        }
+                                    }
+                                    else {
+                                        if(admindata!=0) {
+                                            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    switch (which) {
+                                                        case DialogInterface.BUTTON_POSITIVE:
+                                                            z = "Signed in As " + user.getEmail();
+                                                            isSuccess = true;
+                                                            session_class.tempcommand=1;
+                                                            onPostExecute(z);
+
+                                                            break;
+
+                                                        case DialogInterface.BUTTON_NEGATIVE:
+                                                            z = "Signed in As " + user.getEmail();
+                                                            isSuccess = true;
+                                                            session_class.tempcommand=0;
+                                                            onPostExecute(z);
+                                                            break;
+                                                    }
+                                                }
+                                            };
+
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(),R.style.AppCompatAlertDialogStyle));
+                                            builder.setMessage("Admin account detected choice?").setPositiveButton("Admin page", dialogClickListener)
+                                                    .setNegativeButton("User Page", dialogClickListener).show();
+                                        }
+                                        else {
+                                            z = "Signed in As " + user.getEmail();
+                                            isSuccess = true;
+                                            session_class.tempcommand=0;
+                                            onPostExecute(z);
+                                        }
+
+                                    }
+                                }
+                                catch (Exception e){
+                                    Log.e("ERror",e.getMessage());
+                                }
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -154,5 +231,6 @@ public class fragment_login extends Fragment{
         return matcher.matches();
 
     }
+
 }
 

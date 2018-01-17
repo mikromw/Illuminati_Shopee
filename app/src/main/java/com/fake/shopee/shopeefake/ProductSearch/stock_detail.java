@@ -1,4 +1,4 @@
-package com.fake.shopee.shopeefake;
+package com.fake.shopee.shopeefake.ProductSearch;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,14 +10,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fake.shopee.shopeefake.Main_pages.main_cart;
+import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.SQLclass;
+import com.fake.shopee.shopeefake.session_class;
 import com.squareup.picasso.Picasso;
 
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class stock_detail extends AppCompatActivity {
 
-    TextView nama,harga,keterangan,kategori,berat,stock,penjual;
+    TextView nama,harga,keterangan,kategori,berat,stock,penjual,tittletext,kointext;
     Button beli;
+    String a="";
     ImageView image;
     session_class session;
     SQLclass sqlclass;
@@ -32,12 +38,15 @@ public class stock_detail extends AppCompatActivity {
         nama = (TextView) findViewById(R.id.detailproduk);
         penjual = (TextView) findViewById(R.id.detailpenjual);
 
+        tittletext = (TextView) findViewById(R.id.resultsearchbox);
         harga = (TextView) findViewById(R.id.detailharga);
         keterangan = (TextView) findViewById(R.id.detailketerangan);
         kategori = (TextView) findViewById(R.id.detailkategori);
         berat = (TextView) findViewById(R.id.detailberat);
         stock = (TextView) findViewById(R.id.detailstok);
-        image = (ImageView) findViewById(R.id.imagestock);
+        image = (ImageView) findViewById(R.id.detailimage);
+
+        kointext = (TextView) findViewById(R.id.detailkoin);
 
 
 
@@ -46,7 +55,15 @@ public class stock_detail extends AppCompatActivity {
         beli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int buy = sqlclass.queryexecute("")
+                ResultSet query = sqlclass.querydata("select * from cart where pemilik='"+session.getusename()+"' and stock_id='"+a+"' and penjual_pemilik='"+penjual.getText().toString()+"'");
+                try{
+                    while (query.next()){
+
+                    }
+                }catch (Exception e){
+                    Log.e("sqlerror",e.getMessage());
+                }
+                int buy = sqlclass.queryexecute("INSERT INTO cart VALUES ('"+session.getusename()+"', '"+a+"', 1 ,'"+penjual.getText().toString()+"');");
                 Intent a = new Intent(stock_detail.this,main_cart.class);
 
             }
@@ -58,12 +75,15 @@ public class stock_detail extends AppCompatActivity {
 
         try{
             while (result.next()){
+                a = result.getString("stock_id");
                 nama.setText(result.getString("namaproduk"));
+                tittletext.setText(result.getString("namaproduk"));
                 keterangan.setText(result.getString("keterangan"));
                 kategori.setText(result.getString("kategori"));
                 berat.setText(result.getString("berat"));
-                Picasso.with(this).load(result.getString("imagedir")).resize(800,800).centerCrop().into(image);
-                harga.setText(result.getString("harga"));
+                harga.setText("Rp "+result.getString("harga"));
+                kointext.setText("Dapatkan "+String.valueOf("20,000"));
+                Picasso.with(this).load(result.getString("imagedir")).resize(400,400).centerCrop().into(image);
                 stock.setText(result.getString("stock"));
             }
             penjual.setText(session.getusename());

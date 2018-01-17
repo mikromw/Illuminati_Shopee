@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.fake.shopee.shopeefake.Main_pages.main_profile;
 import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.SQLclass;
 import com.fake.shopee.shopeefake.session_class;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.sql.ResultSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,12 +39,16 @@ public class fragement_signup extends Fragment {
     Button btnsignup;
     private FirebaseAuth mAuth;
     ProgressDialog dialog;
+    SQLclass sqLclass;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
+
+        sqLclass = new SQLclass();
+
         ViewGroup rootView = (ViewGroup) inflater.inflate(
                 R.layout.fragment_signup, container, false);
         email = (EditText) rootView.findViewById(R.id.emailsignup);
@@ -117,9 +123,32 @@ public class fragement_signup extends Fragment {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 session_class session = new session_class(getActivity());
                                 session.setusename(user.getEmail());
-                                z = "Signed in As " + user.getEmail();
-                                isSuccess = true;
-                                onPostExecute(z);
+                                ResultSet check = sqLclass.querydata("select * from xuser where pemilik='"+user.getEmail()+"'");
+                                try{
+                                    int calc=0;
+                                    while (check.next()){
+                                        calc++;
+                                    }
+                                    if(calc==0){
+                                        int register = sqLclass.queryexecute("insert into xuser values('"+user.getEmail()+"',0,0,'',0,0,getdate())");
+                                        if(register>0){
+                                            z="Signed in As "+user.getEmail();
+                                            isSuccess=true;
+                                            onPostExecute(z);
+                                        }
+                                        else {
+                                            z="sqlerror";
+                                        }
+                                    }
+                                    else {
+                                        z="Signed in As "+user.getEmail();
+                                        isSuccess=true;
+                                        onPostExecute(z);
+                                    }
+                                }
+                                catch (Exception e){
+                                    Log.e("ERror",e.getMessage());
+                                }
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
