@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 
 import com.fake.shopee.shopeefake.R;
+import com.fake.shopee.shopeefake.SQLclass;
 import com.fake.shopee.shopeefake.upload.activity_galery;
 import com.fake.shopee.shopeefake.upload.camera_test;
 import com.fake.shopee.shopeefake.fragment.fragment_profile;
@@ -39,6 +40,7 @@ public class main_profile extends FragmentActivity {
     Button btnlogin,btnsignup,btnlogout;
     ImageButton mainhome,maintimeline,maincamera,mainnotif,mainprofile,maincart;
     TabLayout tabLayout;
+    SQLclass sqlclass;
     TextView username;
     private FirebaseAuth mAuth;
 
@@ -75,6 +77,8 @@ public class main_profile extends FragmentActivity {
         mainnotif = (ImageButton) findViewById(R.id.profilenotif);
         mainprofile = (ImageButton) findViewById(R.id.profileprofile);
         maincart = (ImageButton) findViewById(R.id.profilecart);
+
+        sqlclass = new SQLclass();
 
         btnlogin = (Button) findViewById(R.id.btnlogin);
         btnlogout = (Button) findViewById(R.id.btnlogout);

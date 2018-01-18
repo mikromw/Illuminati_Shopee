@@ -3,15 +3,21 @@ package com.fake.shopee.shopeefake.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.fake.shopee.shopeefake.R;
 import com.fake.shopee.shopeefake.Main_pages.main_belanjaanku;
+import com.fake.shopee.shopeefake.SQLclass;
+import com.fake.shopee.shopeefake.ShopeePay.RiwayatTransaksiActivity;
 import com.fake.shopee.shopeefake.session_class;
+
+import java.sql.ResultSet;
 
 /**
  * Created by Riandy on 12/1/2017.
@@ -21,12 +27,14 @@ import com.fake.shopee.shopeefake.session_class;
 public class fragment_profile extends Fragment{
     public static int page=1;
     session_class session;
+    SQLclass sqlclass;
     public void oncreate(Bundle state){
         super.onCreate(state);
 
         final Bundle args = getArguments();
     }
-    LinearLayout belanjaanku,koinshopee,dompetshopee,terakhirdilihat;
+    TextView walletamount,coinamount;
+    LinearLayout belanjaanku,koinshopee,dompetshopee,terakhirdilihat,wallet,coin;
     ImageButton belumbayar,dikemas,dikirim,pengembalian,smallbutton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +46,21 @@ public class fragment_profile extends Fragment{
         dikemas = (ImageButton) rootView.findViewById(R.id.dikemas);
         dikirim = (ImageButton) rootView.findViewById(R.id.dikirim);
         pengembalian =(ImageButton) rootView.findViewById(R.id.pengembalian);
+        wallet = (LinearLayout) rootView.findViewById(R.id.shopeepay);
+        coin = (LinearLayout) rootView.findViewById(R.id.coinshopee);
 
+        coinamount = (TextView) rootView.findViewById(R.id.coinleft);
+        sqlclass = new SQLclass();
+        session = new session_class(getActivity());
+
+        ResultSet getcoin = sqlclass.querydata("select * from xuser where pemilik='"+session.getusename()+"'");
+        try {
+            while (getcoin.next()){
+                coinamount.setText(getcoin.getInt("koin"));
+            }
+        }catch (Exception e){
+            Log.e("SQLERROR", e.getMessage());
+        }
 
         belanjaanku.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +105,20 @@ public class fragment_profile extends Fragment{
                 startActivity(a);
             }
         });
-
+        coin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(getActivity(),main_belanjaanku.class);
+                startActivity(a);
+            }
+        });
+        wallet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent a = new Intent(getActivity(),RiwayatTransaksiActivity.class);
+                startActivity(a);
+            }
+        });
 
 
         return rootView;

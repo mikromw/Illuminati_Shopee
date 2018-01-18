@@ -16,8 +16,6 @@ import com.fake.shopee.shopeefake.session_class;
 import com.squareup.picasso.Picasso;
 
 import java.sql.ResultSet;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class stock_detail extends AppCompatActivity {
 

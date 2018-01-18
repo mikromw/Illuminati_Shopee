@@ -66,8 +66,6 @@ public class loginactivity extends FragmentActivity {
         mPager.setOffscreenPageLimit(2);
         mPager.setAdapter(mPagerAdapter);
 
-        tabLayout = (TabLayout) findViewById(R.id.tablogin);
-        tabLayout.setupWithViewPager(mPager);
 
 
     }
